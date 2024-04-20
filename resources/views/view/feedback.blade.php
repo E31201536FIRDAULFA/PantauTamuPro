@@ -19,7 +19,7 @@
             Rekap
         </button>
         <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-            <li><a class="dropdown-item" href="#" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+            <li><a class="dropdown-item" href="{{ route('cetak-feedback') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
             <li><a class="dropdown-item" href="#" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
         </ul>
     </div>
@@ -45,7 +45,7 @@
                                     <th>Opsi</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($feedbacks as $index => $feedback)
+                                    @foreach($feedback as $index => $feedback)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $feedback->keterangan }}</td>
@@ -75,7 +75,7 @@
 <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Tambah Data Karyawan</h4>
     
-    <form action="/feedback" method="post">
+    <form action="{{ route('feedback.store') }}" method="post">
         @csrf
         <div class="form-group">
             <label for="nipd">Keterangan</label>
@@ -94,23 +94,13 @@
 <div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Karyawan</h4>
     
-    <form>
-        <div class="form-group">
-            <label for="nipd">Nipd</label>
-            <input type="text" class="form-control" id="nipd" placeholder="Masukkan nipd">
-        </div>
-        <div class="form-group">
-            <label for="nama">Nama</label>
-            <input type="text" class="form-control" id="nama" placeholder="Masukkan nama">
-        </div>
-        <div class="form-group">
-            <label for="jabatan">Jabatan</label>
-            <input type="text" class="form-control" id="jabatan" placeholder="Masukkan jabatan">
-        </div>
-        <div class="form-group">
-            <label for="divisi">Divisi</label>
-            <input type="text" class="form-control" id="divisi" placeholder="Masukkan asal divisi">
-        </div>
+    <form action="{{ route('feedback.update', $feedback->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="form-group">
+            <label for="nama">Keterangan</label>
+            <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukkan keterangan">
+    </div>
         
         <div style="text-align: center;">
             <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Submit</button>

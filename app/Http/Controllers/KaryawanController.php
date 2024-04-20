@@ -12,8 +12,8 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $karyawans = Karyawan::all();
-        return view ('view.karyawan', compact('karyawans'));
+        $karyawan = Karyawan::all();
+        return view ('view.karyawan', compact('karyawan'));
     }
 
     /**
@@ -21,7 +21,7 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        
+        return view('karyawan.create');
     }
 
     /**
@@ -29,17 +29,10 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nipd' => 'required',
-            'nama' => 'required',
-            'jabatan' => 'required',
-            'divisi' => 'required',
-        ]);
-
-        Karyawan::create($validatedData);
+        Karyawan::create($request->all());
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
-        return redirect()->back()->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('karyawan.index')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -55,15 +48,23 @@ class KaryawanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $karyawan = Karyawan::findOrFail($id);
+
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
+        return view('karyawan.edit', compact('karyawan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {   
+        $karyawan = Karyawan::findOrFail($id);
+
+        $karyawan->update($request->all());
+
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
+        return redirect()->route('karyawan.index')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -74,8 +75,8 @@ class KaryawanController extends Controller
         //
     }
 
-    public function cetakKaryawan(){
-        $dataCetakTamu = Visitor::all();
-        return view ('rekap.cetak-karyawan', compact('dataCetakkaryawan'));
+    public function cetak(){
+        $karyawan = Karyawan::all();
+        return view ('rekap.cetak-karyawan', compact('karyawan'));
     }
 }

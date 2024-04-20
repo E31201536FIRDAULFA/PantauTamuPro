@@ -11,20 +11,25 @@
     <table>
         <thead>
             <tr>
-                <th>NIPD</th>
-                <th>Nama</th>
-                <th>Jabatan</th>
-                <th>Divisi</th>
+            <th>No.</th>
+            <th>Nama</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Alamat</th>
+            <th>No HP</th>
+            <th>TTL</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($karyawan as $index => $karyawan)
+            @foreach($profile as $index => $profile)
             <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ $karyawan->nipd }}</td>
-                <td>{{ $karyawan->nama }}</td>
-                <td>{{ $karyawan->jabatan }}</td>
-                <td>{{ $karyawan->divisi }}</td>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $profile->nama }}</td>
+            <td>{{ $profile->username }}</td>
+            <td>{{ $profile->email }}</td>
+            <td>{{ $profile->alamat }}</td>
+            <td>{{ $profile->no_hp }}</td>
+            <td>{{ $profile->tanggal_lahir }}</td>
             </tr>
             @endforeach
         </tbody>

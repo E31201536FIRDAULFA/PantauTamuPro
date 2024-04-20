@@ -47,28 +47,46 @@ Route::post('/login', [LoginController::class, 'login']);
         Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard')->middleware('auth.admin');
         Route::get('/element',[VisitorController::class,'index'])->name('element')->middleware('auth.admin');
         Route::post('/tambahdata', [VisitorController::class, 'store'])->name('tambahdata');
-        Route::get('/profile',[ProfileController::class,'index'])->name('profile')->middleware('auth.admin');
-        Route::post('/tambahakun',[ProfileController::class,'store'])->name('tambahakun');
-        Route::get('/vip',[VipController::class,'index'])->name('vip')->middleware('auth.admin');
-        Route::post('/tambahvip',[VipController::class,'store'])->name('tambahvip');
-        Route::get('/karyawan',[KaryawanController::class,'index'])->name('karyawan')->middleware('auth.admin');
-        Route::post('/tambahkaryawan',[KaryawanController::class,'store'])->name('tambahkaryawan');
-        Route::get('/feedback',[FeedbackController::class,'index'])->name('feedback');
-        Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback');
+        
+        // Route::get('/feedback',[FeedbackController::class,'index'])->name('feedback');
+        // Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback');
         
         Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
         // Route::delete('/profiles/{id}', [ProfileController::class, 'destroy'])->name('profiles.destroy');
 
+        Route::controller(ProfileController::class)->group(function () {
+            Route::resource('/profile', ProfileController::class);
+            Route::get('/cetak-profile', 'cetak')->name('cetak-profile'); 
+            Route::get('/excel', 'xlsx')->name('xlsx'); 
+        });
+
+        Route::controller(VipController::class)->group(function () {
+            Route::resource('/vip', VipController::class);
+            Route::get('/cetak-vip', 'cetak')->name('cetak-vip'); 
+            Route::get('/excel', 'xlsx')->name('xlsx'); 
+        });
         
         Route::controller(VisitorController::class)->group(function () {
-            Route::get('/cetak-tamu', 'cetakTamu')->name('cetak-tamu'); 
+            Route::get('/cetak-tamu', 'cetak')->name('cetak-tamu'); 
             Route::get('/excel', 'xlsx')->name('xlsx'); 
         
         });
-//     });
-    
-// });
+
+        Route::controller(KaryawanController::class)->group(function () {
+            Route::resource('/karyawan', KaryawanController::class);
+            Route::get('/cetak-karyawan', 'cetak')->name('cetak-karyawan'); 
+            Route::get('/excel', 'xlsx')->name('xlsx'); 
+        });
+
+        Route::controller(FeedbackController::class)->group(function () {
+            Route::resource('/feedback', FeedbackController::class);
+            Route::get('/cetak-feedback', 'cetak')->name('cetak-feedback'); 
+            Route::get('/excel', 'xlsx')->name('xlsx'); 
+        });
+
+        
+
 
 
 

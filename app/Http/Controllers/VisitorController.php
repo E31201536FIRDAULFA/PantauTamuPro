@@ -88,7 +88,7 @@ class VisitorController extends Controller
         //
     }
 
-    public function cetakTamu(){
+    public function cetak(){
         $dataCetakTamu = Visitor::all();
         return view ('rekap.cetak-tamu', compact('dataCetakTamu'));
     }
