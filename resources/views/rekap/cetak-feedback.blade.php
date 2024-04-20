@@ -11,25 +11,20 @@
     <table>
         <thead>
             <tr>
-                <th>No.</th>
+                <th>NIPD</th>
                 <th>Nama</th>
-                <th>Alamat</th>
-                <th>Keperluan</th>
-                <th>Asal Instansi</th>
-                <th>No HP</th>
-                <th>Tanggal</th>
+                <th>Jabatan</th>
+                <th>Divisi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($dataCetakTamu as $index => $visitor)
+            @foreach($karyawan as $index => $karyawan)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $visitor->nama }}</td>
-                <td>{{ $visitor->alamat }}</td>
-                <td>{{ $visitor->keperluan }}</td>
-                <td>{{ $visitor->asal_instansi }}</td>
-                <td>{{ $visitor->no_hp }}</td>
-                <td>{{ $visitor->tanggal }}</td>
+                <td>{{ $karyawan->nipd }}</td>
+                <td>{{ $karyawan->nama }}</td>
+                <td>{{ $karyawan->jabatan }}</td>
+                <td>{{ $karyawan->divisi }}</td>
             </tr>
             @endforeach
         </tbody>

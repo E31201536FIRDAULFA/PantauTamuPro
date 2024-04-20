@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Feedback;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FeedbackExport;
 
 class FeedbackController extends Controller
 {
@@ -12,8 +14,8 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-            $feedbacks = Feedback::all();
-            return view ('view.feedback', compact('feedbacks'));
+            $feedback = Feedback::all();
+            return view ('view.feedback', compact('feedback'));
     }
 
     /**
@@ -55,7 +57,10 @@ class FeedbackController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $feedback = Feedback::findOrFail($id);
+
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
+        return view('feedback.edit', compact('feedback'));
     }
 
     /**
@@ -63,7 +68,12 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $feedback = Feedback::findOrFail($id);
+
+        $feedback->update($request->all());
+
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
+        return redirect()->route('feedback.index')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -72,5 +82,15 @@ class FeedbackController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function cetak(){
+        $feedback = Feedback::all();
+        return view ('rekap.cetak-feedback', compact('feedback'));
+    }
+
+    public function xlsx()
+    {
+        return Excel::download(new FeedbackExport, 'feedback.xlsx');
     }
 }

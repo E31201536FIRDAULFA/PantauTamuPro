@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Visitor;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\TamuExport;
 use App\Exports\UsersExport;
 
 class VisitorController extends Controller
@@ -88,7 +87,7 @@ class VisitorController extends Controller
         //
     }
 
-    public function cetakTamu(){
+    public function cetak(){
         $dataCetakTamu = Visitor::all();
         return view ('rekap.cetak-tamu', compact('dataCetakTamu'));
     }

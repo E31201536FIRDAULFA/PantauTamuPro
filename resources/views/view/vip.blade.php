@@ -22,8 +22,8 @@
             Rekap
         </button>
         <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-            <li><a class="dropdown-item" href="#" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="#" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+            <li><a class="dropdown-item" href="{{ route('cetak-vip') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+            <li><a class="dropdown-item" href="{{ route('excel-vip') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
         </ul>
     </div>
     <ul>
@@ -57,7 +57,7 @@
                                     <th>Option</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($vips as $index => $vip)
+                                    @foreach($vip as $index => $vip)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $vip->undangan }}</td>
@@ -105,7 +105,7 @@
 <div id="popup" style="display: none; position: fixed; top: 56%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Tambah Data Tamu Kunjungan</h4>
     
-    <form action="/tambahvip" method="post">
+    <form action="{{ route('vip.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="nama">Undangan</label>

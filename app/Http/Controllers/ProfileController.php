@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProfileExport;
 
 class ProfileController extends Controller
 {
@@ -12,16 +14,16 @@ class ProfileController extends Controller
      */
     public function index()
     {
-            $profiles = Profile::all();
-            return view ('view.profile', compact('profiles'));
-        }
+        $profile = Profile::all();
+        return view ('view.profile', compact('profile'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('profile.create');
     }
 
     /**
@@ -29,18 +31,10 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-            'tanggal_lahir' => 'required',
-        ]);
+        Profile::create($request->all());
 
-        Profile::create($validatedData);
-
-        return redirect()->back()->with('success', 'Data berhasil disimpan!');
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
+        return redirect()->route('profile.index')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -54,52 +48,42 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $id)
     {
         $profile = Profile::findOrFail($id);
+
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
         return view('profile.edit', compact('profile'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        $request->validate([
-            'nama' => 'required|string',
-            'username' => 'required|string',
-            'email' => 'required|email',
-            'alamat' => 'required|string',
-            'no_hp' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-        ]);
+        $profile = Profile::findOrFail($id);
 
-        try {
-            $profile = Profile::findOrFail($id);
-            $profile->nama = $request->input('nama');
-            $profile->username = $request->input('username');
-            $profile->email = $request->input('email');
-            $profile->alamat = $request->input('alamat');
-            $profile->no_hp = $request->input('no_hp');
-            $profile->tanggal_lahir = $request->input('tanggal_lahir');
-            $profile->save();
-            return redirect()->route('profile.index')->with('success', 'Data pengguna berhasil diperbarui.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal memperbarui data pengguna. Silakan coba lagi.');
-        }
+        $profile->update($request->all());
+
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
+        return redirect()->route('profile.index')->with('success', 'Data berhasil disimpan!');
     }
-    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $profile = Profile::findOrFail($id);
-        $profile->delete();
-
-        return redirect()->route('profiles.index')->with('success', 'Profil berhasil dihapus!');
+        //
     }
 
-    public function cetakProfil(){
-        $dataCetakTamu = Visitor::all();
-        return view ('rekap.cetak-profil', compact('dataCetakprofil'));
+    public function cetak(){
+        $profile = Profile::all();
+        return view ('rekap.cetak-profile', compact('profile'));
+    }
+
+    public function xlsx()
+    {
+        return Excel::download(new ProfileExport, 'profiles.xlsx');
     }
 }

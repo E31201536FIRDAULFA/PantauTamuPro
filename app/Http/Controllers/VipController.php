@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Vip;
+use App\Exports\VipExport;
 
 class VipController extends Controller
 {
@@ -12,8 +14,8 @@ class VipController extends Controller
      */
     public function index()
     {
-        $vips = Vip::all();
-        return view ('view.vip', compact('vips'));
+        $vip = Vip::all();
+        return view ('view.vip', compact('vip'));
     }
 
     /**
@@ -21,7 +23,7 @@ class VipController extends Controller
      */
     public function create()
     {
-        //
+        return view('vip.create');
     }
 
     /**
@@ -29,22 +31,11 @@ class VipController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data jika diperlukan
-        $validatedData = $request->validate([
-            'undangan' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'keperluan' => 'required',
-            'asal_instansi' => 'required',
-            'no_hp' => 'required',
-            'tanggal' => 'required',
-        ]);
-
         // Simpan data ke database
-        Vip::create($validatedData);
+        Vip::create($request->all());
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
-        return redirect()->back()->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('vip.index')->with('success', 'Data berhasil disimpan!');
     }
 
     /**
@@ -79,8 +70,13 @@ class VipController extends Controller
         //
     }
 
-    public function cetakVip(){
-        $dataCetakTamu = Visitor::all();
-        return view ('rekap.cetak-vip', compact('dataCetakvip'));
+    public function cetak(){
+        $vip = Vip::all();
+        return view ('rekap.cetak-vip', compact('vip'));
+    }
+
+    public function xlsx()
+    {
+        return Excel::download(new VipExport, 'vip.xlsx');
     }
 }

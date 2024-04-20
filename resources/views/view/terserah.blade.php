@@ -17,8 +17,8 @@
             Rekap
         </button>
         <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-            <li><a class="dropdown-item" href="{{ route('cetak-profile') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="{{ route('excel-profile') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+            <li><a class="dropdown-item" href="#" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+            <li><a class="dropdown-item" href="#" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
         </ul>
     </div>
     <ul>
@@ -124,12 +124,12 @@
 <div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 700px; ">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Tamu Kunjungan</h4>
 
-    <form action="{{ route('profile.update', $profile->id) }}" method="POST">
+    <form action="" method="POST">
     @csrf
     @method('PUT')
         <div class="form-group">
             <label for="nipd">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" value="{{ $profile->nama }}">
+            <input type="text" class="form-control" id="nipd" name="nipd" value="{{ $profile->nama }}">
         </div>
         <div class="form-group">
             <label for="username">Username</label>

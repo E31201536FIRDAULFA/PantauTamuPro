@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Visitor;
 
 class HomeController extends Controller
 {
@@ -22,7 +21,5 @@ class HomeController extends Controller
     public function tabler(){
         return view ('view.tables');
     }
-
-    
 
 }

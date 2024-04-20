@@ -2,16 +2,16 @@
 
 namespace App\Exports;
 
+use App\Models\Feedback;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use App\Models\Visitor;
 
-class TamuExport implements FromCollection
+class FeedbackExport implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Visitor::all();
+        return Feedback::all();
     }
 }
