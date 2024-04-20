@@ -1,54 +1,86 @@
-body {
-    background: linear-gradient(135deg, #ffffff, #ffd700);
-    /* Gradien dari putih ke kuning */
-    height: 100vh;
+.body {
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.card {
-    width: 1100px;
-    /* Lebar kontainer form */
-    height: auto;
-    /* Tinggi kontainer menyesuaikan dengan isi */
-    border-radius: 70px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 30%;
-    margin-bottom: 5%;
-    /* Menambahkan margin atas dan bawah */
-    overflow: auto;
-    /* Menambahkan scroll jika konten lebih besar dari ketinggian kartu */
+.container {
+    padding-right: 0;
+    padding-left: 0;
+
 }
 
-.card-header {
-    background-color: #ffd700;
-    /* Warna kuning */
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.card-body {
+    padding: 20px;
+    width: 100%;
 }
 
-.btn-primary,
-.btn-success {
-    background-color: #333;
-    /* Warna hitam */
-    border-color: #333;
-    /* Warna hitam */
+.sidebar {
+    background-color: #f4f4f4;
+    padding: 20px;
+    color: rgb(19, 5, 5);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    z-index: 1;
+    /* Untuk memastikan sidebar tetap di atas konten */
+    overflow-x: hidden;
+    /* Untuk mengatasi masalah scrollbar horizontal */
 }
 
-.btn-submit {
-    background-color: #ffd700;
-    /* Warna hitam */
-    border-color: #e6b800;
-    /* Warna border menggunakan kuning */
-    color: white;
+.image-container {
+    margin-top: 50px;
+
+    /* Adjust the margin-top as needed */
 }
 
-.btn-primary:hover,
-.btn-success:hover {
-    background-color: #555;
-    /* Warna abu-abu lebih tua saat hover */
-    border-color: #555;
-    /* Warna abu-abu lebih tua saat hover */
+/* Gaya tambahan untuk dropdown */
+.dropdown-menu {
+    background-color: #f8f9fa;
+    /* Warna latar belakang */
+    border: 1px solid #ced4da;
+    /* Warna border */
+}
+
+.dropdown-item {
+    color: #343a40;
+    /* Warna teks */
+    transition: background-color 0.3s ease;
+    /* Efek transisi */
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #007bff;
+    /* Warna latar belakang saat di-hover */
+    color: #fff;
+    /* Warna teks saat di-hover */
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #0056b3;
+    /* Warna latar belakang saat aktif */
+    color: #fff;
+    /* Warna teks saat aktif */
+}
+
+.dropdown-toggle::after {
+    content: none;
+    /* Hilangkan panah dropdown bawaan */
+}
+
+.dropdown-toggle::before {
+    content: '\f107';
+    /* Tambahkan ikon panah ke bawah */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-left: 5px;
+    transition: transform 0.4s ease;
+    /* Efek transisi */
+}
+
+.dropdown-toggle[aria-expanded="true"]::before {
+    transform: rotate(180deg);
+    /* Putar ikon panah saat dropdown terbuka */
 }

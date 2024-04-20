@@ -16,6 +16,11 @@ class FormulirController extends Controller
         return view ('view.daftar', compact('visitors'));
     }
 
+    public function survey(){
+        $visitors = Visitor::all();
+        return view ('view.survey', compact('visitors'));
+    }
+
     public function storeForm(Request $request)
     {
          // Validasi reCAPTCHA token

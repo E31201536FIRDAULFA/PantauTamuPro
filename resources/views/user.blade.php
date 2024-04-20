@@ -31,8 +31,8 @@
       <main class="content">
         <h1>Pantau <span>Tamu-Pro</span></h1>
         <p> Jaga jejak tamu Anda dengan mudah dan aman menggunakan aplikasi buku tamu kami. Dengan fitur-fitur yang praktis dan andal, Anda dapat melacak setiap kunjungan, mengelola informasi kontak, dan memastikan pengalaman tamu yang lancar setiap saat. Tetap terhubung dengan para tamu Anda, tanpa kehilangan detail penting!</p>
-        <a href="/formulir" class="btn">Isi Tamu</a>
-        <a href="/codevip" class="btn">VIP</a>
+        <a href="{{ route('form-kunjungan') }}" class="btn">Isi Tamu</a>
+        <a href="{{ route('codevip') }}" class="btn">VIP</a>
       </main>
       <div class="header__image">
         <img src="img/icon.png" alt="header" />

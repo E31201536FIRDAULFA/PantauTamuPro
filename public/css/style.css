@@ -13636,26 +13636,43 @@ fieldset:disabled .btn {
 }
 
 .nav {
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
+    width: 100%;
+    /* Mengisi seluruh lebar layar */
+    height: 100vh;
+    /* Mengisi seluruh tinggi layar */
+    padding: 20px 0;
+    /* Atur padding jika diperlukan */
+    background-color: #fff;
+}
+
+.nav img {
+    display: block;
+    margin: auto;
+    max-width: 65px;
+    max-height: 65px;
+    margin-top: 13px;
+    margin-bottom: 15px;
+}
+
+.nav-item {
     list-style: none;
-    background: linear-gradient(180deg,
-            #a87c2d 5%,
-            #f0d27f 25.01%,
-            #f3cb51 74.44%,
-            #906126 100%);
+    /* Menghilangkan poin daftar */
+    margin-bottom: 10px;
+    /* Atur jarak antar item */
 }
 
 .nav-link {
-    display: block;
-    padding: 0.5rem 1rem;
-    color: #0d6efd;
     text-decoration: none;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-        border-color 0.15s ease-in-out;
+    /* Menghilangkan garis bawah pada tautan */
+    color: #000;
+    /* Ganti dengan warna teks yang sesuai */
+    display: block;
+    padding: 10px;
+    /* Atur padding tautan */
 }
+
+/* Gaya lainnya sesuai kebutuhan */
+
 
 @media (prefers-reduced-motion: reduce) {
     .nav-link {

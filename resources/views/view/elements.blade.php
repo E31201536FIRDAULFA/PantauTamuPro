@@ -21,7 +21,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
             <li><a class="dropdown-item" href="{{ route('cetak-tamu') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="#" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+            <li><a class="dropdown-item" href="{{ route('xlsx') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
         </ul>
     </div>
     <ul>
@@ -100,7 +100,7 @@
         </div>
         <div class="form-group">
             <label for="tanggal">Tanggal</label>
-            <input type="text" class="form-control" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal">
+            <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal">
         </div>
         <div style="text-align: center;">
             <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Submit</button>

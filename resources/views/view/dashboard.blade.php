@@ -1,5 +1,12 @@
 @extends('app')
 @section('content')
+<style>
+.bg-secondary {
+    background-color: #6c757d; /* Ganti dengan warna secondary yang diinginkan */
+    /* Tambahan gaya CSS lainnya sesuai kebutuhan */
+}
+</style>
+
 <div class="row">
     <div class="col-md-12 grid-margin">
         <div class="d-flex justify-content-between align-items-center">
@@ -42,7 +49,7 @@ try {
 }
 ?>
 <div class="col-md-3 grid-margin stretch-card">
-    <div class="card">
+    <div class="card" class="bg-secondary">
         <div class="card-body">
             <p class="card-title text-md-center text-xl-left">Jumlah Tamu</p>
             <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
