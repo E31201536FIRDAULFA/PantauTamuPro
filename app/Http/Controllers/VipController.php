@@ -14,7 +14,7 @@ class VipController extends Controller
      */
     public function index()
     {
-        $vip = Vip::all();
+        $vip = Vip::orderBy('created_at', 'desc')->get();
         return view ('view.vip', compact('vip'));
     }
 
