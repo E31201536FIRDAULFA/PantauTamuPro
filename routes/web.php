@@ -12,6 +12,7 @@ use App\Http\Controllers\VipController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,13 @@ Route::post('/login', [LoginController::class, 'login']);
             Route::resource('/karyawan', KaryawanController::class);
             Route::get('/cetak-karyawan', 'cetak')->name('cetak-karyawan'); 
             Route::get('/excel-karyawan', 'xlsx')->name('excel-karyawan');
+            
+        });
+
+        Route::controller(SurveyController::class)->group(function () {
+            Route::resource('/survey', SurveyController::class);
+            Route::get('/cetak-questions', 'cetak')->name('cetak-questions'); 
+            Route::get('/excel-questions', 'xlsx')->name('excel-questions');
             
         });
 

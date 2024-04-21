@@ -59,7 +59,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('karyawan.index') }}">
+        <a class="nav-link" href="{{ route('survey.index') }}">
             <i class="ti-agenda menu-icon"></i>
             <span class="menu-title">Manajemen Survey</span>
         </a>
