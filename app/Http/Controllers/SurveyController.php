@@ -17,12 +17,33 @@ class SurveyController extends Controller
 
     public function create()
     {
-        return view('questions.create');
+        return view('survey.create');
     }
 
     public function store(Request $request)
     {
         Survey::create($request->all());
+
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
+        return redirect()->route('survey.index')->with('success', 'Data berhasil disimpan!');
+    }
+
+    public function edit(string $id)
+    {
+        $survey = Survey::findOrFail($id);
+
+        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
+        return view('survey.edit', compact('survey'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {   
+        $survey = Survey::findOrFail($id);
+
+        $survey->update($request->all());
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
         return redirect()->route('survey.index')->with('success', 'Data berhasil disimpan!');

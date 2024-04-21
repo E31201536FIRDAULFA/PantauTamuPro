@@ -99,7 +99,7 @@
     @method('PUT')
     <div class="form-group">
             <label for="nama">Keterangan</label>
-            <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukkan keterangan">
+            <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukkan keterangan" value="{{ $feedback->keterangan }}">
     </div>
         
         <div style="text-align: center;">

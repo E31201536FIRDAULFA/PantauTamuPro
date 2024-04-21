@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between align-items-center">
     <div>
-        <h4 class="font-weight-bold mb-0">Manajemen Data Karyawan</h4>
+        <h4 class="font-weight-bold mb-0">Manajemen Data QUESTIONS</h4>
     </div>
     <div>
         <p id="reportButton"></p>
@@ -77,15 +77,15 @@
 <!-- END SECTION CONTAINER TABEL -->
 
 
-<!-- POP UP TAMBAH KARYAWAN -->
+<!-- POP UP TAMBAH QUESTIONS -->
 <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
-    <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Tambah Data Karyawan</h4>
+    <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Tambah Data QUESTIONS</h4>
     
     <form action="{{ route('survey.store') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="pertanyaan">Pertanyaan</label>
-            <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" placeholder="Masukkan pertanyaan">
+            <label for="question">Pertanyaan</label>
+            <input type="text" class="form-control" id="question" name="question" placeholder="Masukkan question">
         </div>
         <div class="form-group">
             <label for="baik">Baik</label>
@@ -110,34 +110,34 @@
         </div>
     </form>
 </div>
-<!-- END POP UP TAMBAH KARYAWAN -->
+<!-- END POP UP TAMBAH QUESTIONS -->
 
-<!-- POP UP EDIT KARYAWAN -->
+<!-- POP UP EDIT QUESTIONS -->
 <div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
-    <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Karyawan</h4>
+    <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data QUESTIONS</h4>
     
     <form action="{{ route('survey.update', $survey->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="pertanyaan">Pertanyaan</label>
-            <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" placeholder="Masukkan pertanyaan">
+            <label for="question">Pertanyaan</label>
+            <input type="text" class="form-control" id="question" name="question" placeholder="Masukkan question" value="{{ $survey->question }}">
         </div>
         <div class="form-group">
             <label for="baik">Baik</label>
-            <input type="text" class="form-control" id="baik" name="baik" placeholder="Masukkan baik">
+            <input type="text" class="form-control" id="baik" name="baik" placeholder="Masukkan baik" value="{{ $survey->baik }}">
         </div>
         <div class="form-group">
             <label for="sangat_baik">Sangat Baik</label>
-            <input type="text" class="form-control" id="sangat_baik" name="sangat_baik" placeholder="Masukkan sangat_baik">
+            <input type="text" class="form-control" id="sangat_baik" name="sangat_baik" placeholder="Masukkan sangat_baik" value="{{ $survey->sangat_baik }}">
         </div>
         <div class="form-group">
             <label for="buruk">Buruk</label>
-            <input type="text" class="form-control" id="buruk" name="buruk" placeholder="Masukkan asal buruk">
+            <input type="text" class="form-control" id="buruk" name="buruk" placeholder="Masukkan asal buruk" value="{{ $survey->buruk }}">
         </div>
         <div class="form-group">
             <label for="sangat_buruk">Sangat Buruk</label>
-            <input type="text" class="form-control" id="sangat_buruk" name="sangat_buruk" placeholder="Masukkan asal sangat_buruk">
+            <input type="text" class="form-control" id="sangat_buruk" name="sangat_buruk" placeholder="Masukkan asal sangat_buruk" value="{{ $survey->sangat_buruk }}">
         </div>
 
         <div style="text-align: center;">
@@ -146,7 +146,7 @@
         </div>
     </form>
 </div>
-<!-- END POP UP EDIT KARYAWAN -->
+<!-- END POP UP EDIT QUESTIONS -->
 
 <script>
     // Mendapatkan tombol "Report"

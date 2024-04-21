@@ -9,7 +9,7 @@ class Survey extends Model
 {
     protected $table = 'survey_questions';
     protected $fillable = [
-        'questions',
+        'question',
         'baik',
         'sangat_baik',
         'buruk',

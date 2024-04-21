@@ -37,83 +37,29 @@
 
             <div class="card-body w-100">
                 <form action="/form" method="post">
-                    @csrf
-                <form>
-                    <label for="rating">1. Seberapa mudah Anda menavigasi aplikasi kami?</label>
+                @csrf
+                @foreach($survey as $survey)
+                <label for="rating">{{ $survey->question }}</label>
                 <div>
-                    <input type="radio" id="rating-5" name="rating" value="5">
-                    <label for="rating-5">Sangat Mudah</label>
+                    <input type="radio" id="rating-{{ $survey->id }}5" name="rating" value="5">
+                    <label for="rating-{{ $survey->id }}5">Baik</label>
                 </div>
                 <div>
-                    <input type="radio" id="rating-4" name="rating" value="4">
-                    <label for="rating-4">Mudah</label>
+                    <input type="radio" id="rating-{{ $survey->id }}4" name="rating" value="4">
+                    <label for="rating-{{ $survey->id }}4">Sangat Baik</label>
                 </div>
                 <div>
-                    <input type="radio" id="rating-3" name="rating" value="3">
-                    <label for="rating-3">Sangat Sulit</label>
+                    <input type="radio" id="rating-{{ $survey->id }}3" name="rating" value="3">
+                    <label for="rating-{{ $survey->id }}3">Buruk</label>
                 </div>
                 <div>
-                    <input type="radio" id="rating-2" name="rating" value="2">
-                    <label for="rating-2">Sulit</label>
-                </div>
-                <br>
-
-                <label for="rating">2. Seberapa baik Anda merasa aplikasi kami memenuhi ekspektasi Anda?</label>
-                <div>
-                    <input type="radio" id="rating-5" name="rating" value="5">
-                    <label for="rating-5">Sangat Mudah</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-4" name="rating" value="4">
-                    <label for="rating-4">Mudah</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-3" name="rating" value="3">
-                    <label for="rating-3">Sangat Sulit</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-2" name="rating" value="2">
-                    <label for="rating-2">Sulit</label>
+                    <input type="radio" id="rating-{{ $survey->id }}2" name="rating" value="2">
+                    <label for="rating-{{ $survey->id }}2">Sangat Buruk</label>
                 </div>
                 <br>
 
-                <label for="rating">3. Apakah Anda menyukai tata letak dan desain visual dari aplikasi kami?</label>
-                <div>
-                    <input type="radio" id="rating-5" name="rating" value="5">
-                    <label for="rating-5">Sangat Mudah</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-4" name="rating" value="4">
-                    <label for="rating-4">Mudah</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-3" name="rating" value="3">
-                    <label for="rating-3">Sangat Sulit</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-2" name="rating" value="2">
-                    <label for="rating-2">Sulit</label>
-                </div>
-                <br>
-
-                <label for="rating">4. Apakah Anda mengalami kesulitan dalam menemukan fitur atau informasi tertentu di dalam aplikasi?</label>
-                <div>
-                    <input type="radio" id="rating-5" name="rating" value="5">
-                    <label for="rating-5">Sangat Mudah</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-4" name="rating" value="4">
-                    <label for="rating-4">Mudah</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-3" name="rating" value="3">
-                    <label for="rating-3">Sangat Sulit</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-2" name="rating" value="2">
-                    <label for="rating-2">Sulit</label>
-                </div>
                 
+                @endforeach
                 </form>
           
                 <div class="text-center mt-4">
