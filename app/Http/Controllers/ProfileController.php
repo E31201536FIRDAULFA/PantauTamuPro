@@ -12,8 +12,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profile = Profile::all();
-        return view ('view.profile', compact('profile'));
+        $profiles = Profile::all();
+        return view ('view.profile', compact('profiles'));
     }
 
     /**
@@ -48,10 +48,10 @@ class ProfileController extends Controller
      */
     public function edit(string $id)
     {
-        $profile = Profile::findOrFail($id);
+        $profiles = Profile::findOrFail($id);
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
-        return view('profile.edit', compact('profile'));
+        return view('profile.edit', compact('profiles'));
     }
 
     /**
@@ -59,9 +59,9 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $profile = Profile::findOrFail($id);
+        $profiles = Profile::findOrFail($id);
 
-        $profile->update($request->all());
+        $profiles->update($request->all());
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
         return redirect()->route('profile.index')->with('success', 'Data berhasil disimpan!');
@@ -72,11 +72,14 @@ class ProfileController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $profiles = Profile::findOrFail($id);
+        $profiles->delete();
+    
+        return redirect()->route('profile.index')->with('success', 'Profil berhasil dihapus!');
     }
 
     public function cetak(){
-        $profile = Profile::all();
-        return view ('rekap.cetak-profile', compact('profile'));
+        $profiles = Profile::all();
+        return view ('rekap.cetak-profile', compact('profiles'));
     }
 }

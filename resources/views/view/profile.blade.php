@@ -49,7 +49,7 @@
                                     <th>Option</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($profile as $index => $profile)
+                                    @foreach($profiles as $index => $profile)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $profile->nama }}</td>
@@ -62,9 +62,14 @@
                                             <button onclick="togglePopupedit({{ $profile->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
                                                 <i class="fas fa-edit"></i>&nbsp;Edit
                                             </button><br><br>
-                                            <button onclick="konfirmasiHapus()" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
+                                            <form action="{{ route('profile.destroy', $profile->id) }}" method="POST" class="delete-form">
+                                            @method('delete')
+                                            @csrf
+                                            <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
                                                 <i class="fas fa-trash-alt"></i>&nbsp;Delete
                                             </button>
+                                            
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -121,6 +126,7 @@
 <!-- END POP UP TAMBAH DATA -->
 
 <!-- POP UP EDIT DATA -->
+@foreach($profiles as $profile)
 <div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 700px; ">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Tamu Kunjungan</h4>
 
@@ -158,6 +164,7 @@
         </div>
     </form>
 </div>
+@endforeach
 <!-- END POP UP EDIT DATA -->
 
 
@@ -206,22 +213,6 @@
         } else {
             popup.style.display = 'none';
         }
-    }
-
-    function konfirmasiHapus(id) {
-        // Menampilkan jendela konfirmasi dengan pesan khusus
-        if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
-            // Jika pengguna mengklik "OK", lakukan penghapusan
-            hapusData(id);
-        } else {
-            // Jika pengguna mengklik "Batal", tidak lakukan apa-apa
-            return;
-        }
-    }
-
-    function hapusData(id) {
-        // Di sini Anda akan menempatkan kode untuk menghapus data
-        alert("Data berhasil dihapus dengan ID: " + id); // Contoh pesan konfirmasi
     }
 </script>
 @endsection

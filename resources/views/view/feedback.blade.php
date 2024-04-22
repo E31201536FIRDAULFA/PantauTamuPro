@@ -45,17 +45,21 @@
                                     <th>Opsi</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($feedback as $index => $feedback)
+                                    @foreach($feedbacks as $index => $feedback)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $feedback->keterangan }}</td>
                                         <td>
-                                        <button onclick="togglePopupedit()" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;">
-                                            <i class="fas fa-edit"></i>&nbsp;Edit
-                                        </button><br><br>
-                                        <button onclick="konfirmasiHapus()" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
-                                            <i class="fas fa-trash-alt"></i>&nbsp;Delete
-                                        </button>
+                                        <button onclick="togglePopupedit({{ $feedback->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
+                                                <i class="fas fa-edit"></i>&nbsp;Edit
+                                            </button><br><br>
+                                            <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST" class="delete-form">
+                                            @method('delete')
+                                            @csrf
+                                            <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
+                                                <i class="fas fa-trash-alt"></i>&nbsp;Delete
+                                            </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -91,6 +95,7 @@
 <!-- END POP UP TAMBAH KARYAWAN -->
 
 <!-- POP UP EDIT KARYAWAN -->
+@foreach($feedbacks as $feedback)
 <div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Karyawan</h4>
     
@@ -108,6 +113,7 @@
         </div>
     </form>
 </div>
+@endforeach
 <!-- END POP UP EDIT KARYAWAN -->
 
 <script>

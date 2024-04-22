@@ -12,8 +12,8 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $karyawan = Karyawan::all();
-        return view ('view.karyawan', compact('karyawan'));
+        $karyawans = Karyawan::all();
+        return view ('view.karyawan', compact('karyawans'));
     }
 
     /**
@@ -48,10 +48,10 @@ class KaryawanController extends Controller
      */
     public function edit(string $id)
     {
-        $karyawan = Karyawan::findOrFail($id);
+        $karyawans = Karyawan::findOrFail($id);
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
-        return view('karyawan.edit', compact('karyawan'));
+        return view('karyawan.edit', compact('karyawans'));
     }
 
     /**
@@ -59,9 +59,9 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, string $id)
     {   
-        $karyawan = Karyawan::findOrFail($id);
+        $karyawans = Karyawan::findOrFail($id);
 
-        $karyawan->update($request->all());
+        $karyawans->update($request->all());
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
         return redirect()->route('karyawan.index')->with('success', 'Data berhasil disimpan!');
@@ -72,11 +72,14 @@ class KaryawanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $karyawans = Karyawan::findOrFail($id);
+        $karyawans->delete();
+    
+        return redirect()->route('karyawan.index')->with('success', 'Profil berhasil dihapus!');
     }
 
     public function cetak(){
-        $karyawan = Karyawan::all();
-        return view ('rekap.cetak-karyawan', compact('karyawan'));
+        $karyawans = Karyawan::all();
+        return view ('rekap.cetak-karyawan', compact('karyawans'));
     }
 }

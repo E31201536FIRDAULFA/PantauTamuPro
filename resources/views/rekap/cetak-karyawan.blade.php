@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($karyawan as $index => $karyawan)
+            @foreach($karyawans as $index => $karyawan)
             <tr>
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $karyawan->nipd }}</td>

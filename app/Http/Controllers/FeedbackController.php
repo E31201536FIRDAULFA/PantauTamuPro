@@ -12,8 +12,8 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-            $feedback = Feedback::all();
-            return view ('view.feedback', compact('feedback'));
+            $feedbacks = Feedback::all();
+            return view ('view.feedback', compact('feedbacks'));
     }
 
     /**
@@ -55,10 +55,10 @@ class FeedbackController extends Controller
      */
     public function edit(string $id)
     {
-        $feedback = Feedback::findOrFail($id);
+        $feedbacks = Feedback::findOrFail($id);
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
-        return view('feedback.edit', compact('feedback'));
+        return view('feedback.edit', compact('feedbacks'));
     }
 
     /**
@@ -66,9 +66,9 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $feedback = Feedback::findOrFail($id);
+        $feedbacks = Feedback::findOrFail($id);
 
-        $feedback->update($request->all());
+        $feedbacks->update($request->all());
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
         return redirect()->route('feedback.index')->with('success', 'Data berhasil disimpan!');
@@ -83,7 +83,7 @@ class FeedbackController extends Controller
     }
 
     public function cetak(){
-        $feedback = Feedback::all();
-        return view ('rekap.cetak-feedback', compact('feedback'));
+        $feedbacks = Feedback::all();
+        return view ('rekap.cetak-feedback', compact('feedbacks'));
     }
 }
