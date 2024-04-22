@@ -46,9 +46,15 @@
                                     <th>Option</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($karyawan as $index => $karyawan)
+                                    <!-- Looping through karyawans, but limited to 10 per page -->
+                                    @php
+                                    $currentPage = $karyawans->currentPage() ?? 1; // Get current page
+                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                                    @endphp
+                                    <!-- Looping through karyawans, but limited to 10 per page -->
+                                    @foreach($karyawans as $index => $karyawan)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($karyawans->currentPage() - 1) * $karyawans->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $karyawan->nipd }}</td>
                                         <td>{{ $karyawan->nama }}</td>
                                         <td>{{ $karyawan->jabatan }}</td>
@@ -70,6 +76,24 @@
                 </div>
             </div>
         </div>
+        <!-- Pagination -->
+        <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($karyawans->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $karyawans->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $karyawans->lastPage(); $i++)
+            <li class="page-item {{ ($karyawans->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $karyawans->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($karyawans->currentPage() == $karyawans->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $karyawans->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL -->

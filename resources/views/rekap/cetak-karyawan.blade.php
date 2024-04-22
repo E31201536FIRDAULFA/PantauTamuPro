@@ -11,6 +11,7 @@
     <table>
         <thead>
             <tr>
+                <th>No.</th>
                 <th>NIPD</th>
                 <th>Nama</th>
                 <th>Jabatan</th>

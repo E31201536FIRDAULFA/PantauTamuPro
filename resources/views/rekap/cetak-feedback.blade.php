@@ -11,6 +11,7 @@
     <table>
         <thead>
             <tr>
+                <th>No.</th>
                 <th>Keterangan</th>
                 
             </tr>

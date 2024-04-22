@@ -73,7 +73,7 @@ try {
             <!-- Tambahkan jarak menggunakan margin -->
             <p class="mb-4"></p> <!-- Aturan baru -->
                 <!-- Tanda panah untuk "view details" -->
-                <a href="" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('vip.index') }}" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
                 <!--<p class="mb-0 mt-2 text-danger">view<span class="text-black ms-1"><small>detail</small></span></p>-->
             </div>
         </div>
@@ -102,7 +102,7 @@ try {
                 <!-- Tambahkan jarak menggunakan margin -->
                 <p class="mb-4"></p> <!-- Aturan baru -->
                 <!-- Tanda panah untuk "view details" -->
-                <a href="" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('profile.index') }}" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -132,7 +132,7 @@ try {
                 <!-- Tambahkan jarak menggunakan margin -->
                 <p class="mb-4"></p> <!-- Aturan baru -->
                 <!-- Tanda panah untuk "view details" -->
-                <a href="" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('karyawan.index') }}" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -160,7 +160,7 @@ try {
                 <!-- Tambahkan jarak menggunakan margin -->
                 <p class="mb-4"></p> <!-- Aturan baru -->
                 <!-- Tanda panah untuk "view details" -->
-                <a href="" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('feedback.index') }}" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>

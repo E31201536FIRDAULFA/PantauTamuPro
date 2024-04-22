@@ -45,9 +45,15 @@
                                     <th>Opsi</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($feedback as $index => $feedback)
+                                    <!-- Looping through feedbacks, but limited to 10 per page -->
+                                    @php
+                                    $currentPage = $feedbacks->currentPage() ?? 1; // Get current page
+                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                                    @endphp
+                                    <!-- Looping through feedbacks, but limited to 10 per page -->
+                                    @foreach($feedbacks as $index => $feedback)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $feedback->keterangan }}</td>
                                         <td>
                                         <button onclick="togglePopupedit()" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;">
@@ -66,6 +72,24 @@
                 </div>
             </div>
         </div>
+        <!-- Pagination -->
+        <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($feedbacks->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $feedbacks->lastPage(); $i++)
+            <li class="page-item {{ ($feedbacks->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($feedbacks->currentPage() == $feedbacks->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL -->
