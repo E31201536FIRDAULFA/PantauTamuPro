@@ -20,7 +20,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
             <li><a class="dropdown-item" href="{{ route('cetak-feedback') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="#" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+            <li><a class="dropdown-item" href="{{ route('excel-feedback') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
         </ul>
     </div>
     <ul>
@@ -45,9 +45,9 @@
                                     <th>Opsi</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($feedbacks as $index => $feedback)
+                                    @foreach($feedback as $index => $feedback)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $feedback->keterangan }}</td>
                                         <td>
                                         <button onclick="togglePopupedit({{ $feedback->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
@@ -70,6 +70,24 @@
                 </div>
             </div>
         </div>
+        <!-- Pagination -->
+        <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($feedbacks->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $feedbacks->lastPage(); $i++)
+            <li class="page-item {{ ($feedbacks->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($feedbacks->currentPage() == $feedbacks->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL -->
@@ -104,7 +122,7 @@
     @method('PUT')
     <div class="form-group">
             <label for="nama">Keterangan</label>
-            <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukkan keterangan">
+            <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukkan keterangan" value="{{ $feedback->keterangan }}">
     </div>
         
         <div style="text-align: center;">

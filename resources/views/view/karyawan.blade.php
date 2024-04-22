@@ -18,7 +18,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
             <li><a class="dropdown-item" href="{{ route('cetak-karyawan') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="#" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+            <li><a class="dropdown-item" href="{{ route('excel-karyawan') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
         </ul>
     </div>
     <ul>
@@ -46,9 +46,9 @@
                                     <th>Option</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($karyawans as $index => $karyawan)
+                                    @foreach($karyawan as $index => $karyawan)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($karyawans->currentPage() - 1) * $karyawans->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $karyawan->nipd }}</td>
                                         <td>{{ $karyawan->nama }}</td>
                                         <td>{{ $karyawan->jabatan }}</td>
@@ -74,6 +74,24 @@
                 </div>
             </div>
         </div>
+        <!-- Pagination -->
+        <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($karyawans->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $karyawans->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $karyawans->lastPage(); $i++)
+            <li class="page-item {{ ($karyawans->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $karyawans->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($karyawans->currentPage() == $karyawans->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $karyawans->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL -->

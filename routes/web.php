@@ -12,6 +12,7 @@ use App\Http\Controllers\VipController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,14 @@ use App\Http\Controllers\FeedbackController;
 |
 */
 Route::get('/', [UserController::class, 'index']);
-Route::get('/daftar', [FormulirController::class, 'daftar'])->name('daftar');
-Route::get('/codevip', [HomeController::class, 'codevip'])->name('codevip');
+Route::get('/Daftar-Tamu-Kunjungan', [FormulirController::class, 'daftar'])->name('daftartamukunjungan');
+Route::get('/Survey-Kepuasan-Pengguna', [FormulirController::class, 'survey'])->name('surveypengguna');
+// Route::get('/Survey-Kepuasan-Pengguna', [FormulirController::class, 'submitForm']);
+Route::get('/Input-Vip', [HomeController::class, 'codevip'])->name('codevip');
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/form', [FormulirController::class, 'storeForm']);
-Route::get('/formulir',[FormulirController::class,'index']);
+Route::get('/Formulir-Tamu',[FormulirController::class,'index'])->name('form-kunjungan');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -43,13 +46,15 @@ Route::post('/login', [LoginController::class, 'login']);
         Route::controller(ProfileController::class)->group(function () {
             Route::resource('/profile', ProfileController::class);
             Route::get('/cetak-profile', 'cetak')->name('cetak-profile'); 
-            Route::get('/excel', 'xlsx')->name('xlsx'); 
+            Route::get('/excel-profile', 'xlsx')->name('excel-profile');
+            
         });
 
         Route::controller(VipController::class)->group(function () {
             Route::resource('/vip', VipController::class);
             Route::get('/cetak-vip', 'cetak')->name('cetak-vip'); 
-            Route::get('/excel', 'xlsx')->name('xlsx'); 
+            Route::get('/excel-vip', 'xlsx')->name('excel-vip');
+            
         });
         
         Route::controller(VisitorController::class)->group(function () {
@@ -61,13 +66,24 @@ Route::post('/login', [LoginController::class, 'login']);
         Route::controller(KaryawanController::class)->group(function () {
             Route::resource('/karyawan', KaryawanController::class);
             Route::get('/cetak-karyawan', 'cetak')->name('cetak-karyawan'); 
-            Route::get('/excel', 'xlsx')->name('xlsx'); 
+            Route::get('/excel-karyawan', 'xlsx')->name('excel-karyawan');
+            
+        });
+
+        Route::controller(SurveyController::class)->group(function () {
+            Route::resource('/survey', SurveyController::class);
+            Route::get('/cetak-questions', 'cetak')->name('cetak-questions'); 
+            Route::get('/excel-questions', 'xlsx')->name('excel-questions');
+            Route::get('/survey/{id}/edit', 'edit')->name('survey.edit');
+            Route::put('/survey/{id}', 'update')->name('survey.update');
+            
         });
 
         Route::controller(FeedbackController::class)->group(function () {
             Route::resource('/feedback', FeedbackController::class);
             Route::get('/cetak-feedback', 'cetak')->name('cetak-feedback'); 
-            Route::get('/excel', 'xlsx')->name('xlsx'); 
+            Route::get('/excel-feedback', 'xlsx')->name('excel-feedback');
+            
         });
 
         

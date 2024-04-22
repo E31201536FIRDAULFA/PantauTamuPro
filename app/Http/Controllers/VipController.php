@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Vip;
+use App\Exports\VipExport;
 
 class VipController extends Controller
 {
@@ -12,8 +14,8 @@ class VipController extends Controller
      */
     public function index()
     {
-        $vip = Vip::all();
-        return view ('view.vip', compact('vip'));
+        $vips = Vip::orderBy('created_at', 'desc')->paginate(10);
+        return view ('view.vip', compact('vips'));
     }
 
     /**
@@ -71,5 +73,10 @@ class VipController extends Controller
     public function cetak(){
         $vip = Vip::all();
         return view ('rekap.cetak-vip', compact('vip'));
+    }
+
+    public function xlsx()
+    {
+        return Excel::download(new VipExport, 'vip.xlsx');
     }
 }

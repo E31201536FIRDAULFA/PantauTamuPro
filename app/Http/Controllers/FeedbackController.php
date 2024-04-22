@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Feedback;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FeedbackExport;
 
 class FeedbackController extends Controller
 {
@@ -12,8 +14,8 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-            $feedbacks = Feedback::all();
-            return view ('view.feedback', compact('feedbacks'));
+            $feedback = Feedback::all();
+            return view ('view.feedback', compact('feedback'));
     }
 
     /**
@@ -85,5 +87,10 @@ class FeedbackController extends Controller
     public function cetak(){
         $feedbacks = Feedback::all();
         return view ('rekap.cetak-feedback', compact('feedbacks'));
+    }
+
+    public function xlsx()
+    {
+        return Excel::download(new FeedbackExport, 'feedback.xlsx');
     }
 }

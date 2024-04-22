@@ -7,18 +7,24 @@
     <link rel="stylesheet" href="{{asset('css/cetak.css')}}">
 </head>
 <body>
-    <h2 style="text-align: center;">Laporan Data Tamu Kunjungan</h2>
+    <h2 style="text-align: center;">Laporan Data Feedback</h2>
     <table>
         <thead>
             <tr>
-                <th>Keterangan</th>
+                <th>NIPD</th>
+                <th>Nama</th>
+                <th>Jabatan</th>
+                <th>Divisi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($feedbacks as $index => $feedback)
+            @foreach($karyawan as $index => $karyawan)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $karyawan->keterangan }}</td>
+                <td>{{ $karyawan->nipd }}</td>
+                <td>{{ $karyawan->nama }}</td>
+                <td>{{ $karyawan->jabatan }}</td>
+                <td>{{ $karyawan->divisi }}</td>
             </tr>
             @endforeach
         </tbody>

@@ -18,7 +18,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
             <li><a class="dropdown-item" href="{{ route('cetak-profile') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="#" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+            <li><a class="dropdown-item" href="{{ route('excel-profile') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
         </ul>
     </div>
     <ul>
@@ -49,9 +49,9 @@
                                     <th>Option</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($profiles as $index => $profile)
+                                    @foreach($profile as $index => $profile)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($profiles->currentPage() - 1) * $profiles->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $profile->nama }}</td>
                                         <td>{{ $profile->username }}</td>
                                         <td>{{ $profile->email }}</td>
@@ -80,6 +80,24 @@
                 </div>
             </div>
         </div>
+         <!-- Pagination -->
+         <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($profiles->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $profiles->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $profiles->lastPage(); $i++)
+            <li class="page-item {{ ($profiles->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $profiles->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($profiles->currentPage() == $profiles->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $profiles->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL -->
@@ -114,7 +132,7 @@
         </div>
         <div class="form-group">
             <label for="tanggal_lahir">TTL</label>
-            <input type="text" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan asal ttl">
+            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan asal ttl">
         </div>
         
         <div style="text-align: center;">

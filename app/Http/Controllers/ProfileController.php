@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProfileExport;
 
 class ProfileController extends Controller
 {
@@ -12,8 +14,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::all();
-        return view ('view.profile', compact('profiles'));
+        $profile = Profile::all();
+        return view ('view.profile', compact('profile'));
     }
 
     /**
@@ -81,5 +83,10 @@ class ProfileController extends Controller
     public function cetak(){
         $profiles = Profile::all();
         return view ('rekap.cetak-profile', compact('profiles'));
+    }
+
+    public function xlsx()
+    {
+        return Excel::download(new ProfileExport, 'profiles.xlsx');
     }
 }

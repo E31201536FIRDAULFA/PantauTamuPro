@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\KaryawanExport;
+
 
 class KaryawanController extends Controller
 {
@@ -12,8 +15,8 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $karyawans = Karyawan::all();
-        return view ('view.karyawan', compact('karyawans'));
+        $karyawan = Karyawan::all();
+        return view ('view.karyawan', compact('karyawan'));
     }
 
     /**
@@ -81,5 +84,10 @@ class KaryawanController extends Controller
     public function cetak(){
         $karyawans = Karyawan::all();
         return view ('rekap.cetak-karyawan', compact('karyawans'));
+    }
+
+    public function xlsx()
+    {
+        return Excel::download(new KaryawanExport, 'karyawans.xlsx');
     }
 }

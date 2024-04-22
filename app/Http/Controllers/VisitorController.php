@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Visitor;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\TamuExport;
 use App\Exports\UsersExport;
 
 class VisitorController extends Controller
@@ -15,7 +14,7 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        $visitors = Visitor::all();
+        $visitors = Visitor::orderBy('created_at', 'desc')->paginate(10);
         return view ('view.elements', compact('visitors'));
     }
 

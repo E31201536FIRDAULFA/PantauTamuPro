@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="{{asset('css/cetak.css')}}">
 </head>
 <body>
-    <h2 style="text-align: center;">Laporan Data Tamu Kunjungan</h2>
+    <h2 style="text-align: center;">Laporan Data Karyawan</h2>
     <table>
         <thead>
             <tr>
+                <th>No.</th>
                 <th>NIPD</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
