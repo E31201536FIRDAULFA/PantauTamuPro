@@ -2,61 +2,52 @@
 
 @section('content')
 
+<div class="card">
+    <div class="card-body">
+    <h4 class="font-weight-bold mb-0">Data Tamu Kunjungan</h4>
+    <br>
 <div class="d-flex justify-content-between align-items-center">
-    <div>
-        <h4 class="font-weight-bold mb-0">Manajemen Data Karyawan</h4>
-    </div>
-    <div>
-        <p id="reportButton"></p>
-    </div>
-</div>
-
-<div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-    <div class="dropdown" style="margin-left: 10px;">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
-            Rekap
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-            <li><a class="dropdown-item" href="{{ route('cetak-karyawan') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="{{ route('excel-karyawan') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
-        </ul>
-    </div>
-    <ul>
+<div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
+                    Rekap
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
+                    <li><a class="dropdown-item" href="{{ route('cetak-karyawan') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+                    <li><a class="dropdown-item" href="{{ route('excel-karyawan') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+                </ul>
+            </div>
     <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
         <i class="fas fa-plus"></i> &nbsp;Tambah Karyawan
     </button>
-</ul>
 </div>
 
 <!-- SECTION CONTAINER TABEL -->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
+
                         <div class="table-responsive">
                         <table class="table table-striped table-hover" id="table-list">
                                 <thead>
+                                    <tr>
                                     <th>No.</th>
                                     <th>NIPD</th>
                                     <th>Nama</th>
                                     <th>Jabatan</th>
                                     <th>Divisi</th>
                                     <th>Option</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($karyawan as $index => $karyawan)
+                                    @foreach($karyawans as $index => $karyawan)
+
                                     <tr>
                                         <td>{{ ($karyawans->currentPage() - 1) * $karyawans->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $karyawan->nipd }}</td>
                                         <td>{{ $karyawan->nama }}</td>
                                         <td>{{ $karyawan->jabatan }}</td>
                                         <td>{{ $karyawan->divisi }}</td>
-                                        <td>
+                                        <td class="d-flex align-items-center">
                                         <button onclick="togglePopupedit({{ $karyawan->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
                                                 <i class="fas fa-edit"></i>&nbsp;Edit
-                                            </button><br><br>
+                                            </button>&nbsp;
                                             <form action="{{ route('karyawan.destroy', $karyawan->id) }}" method="POST" class="delete-form">
                                             @method('delete')
                                             @csrf
@@ -72,8 +63,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <!-- END SECTION CONTAINER TABEL -->
+  
         <!-- Pagination -->
         <br></br>
         <nav aria-label="Page navigation example">
@@ -92,9 +83,8 @@
             </ul>
         </nav>
         <!-- End Pagination -->
-    </div>
-</section>
-<!-- END SECTION CONTAINER TABEL -->
+
+
 
 
 <!-- POP UP TAMBAH KARYAWAN -->

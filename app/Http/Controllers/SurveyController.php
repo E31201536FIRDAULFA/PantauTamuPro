@@ -11,7 +11,7 @@ class SurveyController extends Controller
 {
     public function index()
     {
-        $survey = Survey::all();
+        $survey = Survey::orderBy('created_at', 'desc')->paginate(5);
         return view ('view.questions', compact('survey'));
     }
 

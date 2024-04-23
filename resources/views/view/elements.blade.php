@@ -5,98 +5,82 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="css/popup.css">
 </head>
-<div class="d-flex justify-content-between align-items-center">
-    <div>
-        <h4 class="font-weight-bold mb-0">Manajemen Tamu kunjungan</h4>
-    </div>
-    <div>
-        <p id="reportButton"></p>
-    </div>
-</div>
-
-<div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-    <div class="dropdown" style="margin-left: 10px;">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
-            Rekap
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-            <li><a class="dropdown-item" href="{{ route('cetak-tamu') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="{{ route('xlsx') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
-        </ul>
-    </div>
-    <ul>
-        <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
-            <i class="fas fa-plus"></i> &nbsp;Tambah Data 
-        </button>
-    </ul>
-</div>
-
-<!-- CONTAINER TABEL -->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover" id="table-list">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>Keperluan</th>
-                                        <th>Asal Instansi</th>
-                                        <th>No HP</th>
-                                        <th>Tanggal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Looping through visitors, but limited to 10 per page -->
-                                    @php
-                                    $currentPage = $visitors->currentPage() ?? 1; // Get current page
-                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
-                                    @endphp
-                                    <!-- Looping through visitors, but limited to 10 per page -->
-                                    @foreach($visitors as $index => $visitor)
-                                    <tr>
-                                        <td>{{ ($visitors->currentPage() - 1) * $visitors->perPage() + $loop->index + 1 }}</td>
-                                        <td>{{ $visitor->nama }}</td>
-                                        <td>{{ $visitor->alamat }}</td>
-                                        <td>{{ $visitor->keperluan }}</td>
-                                        <td>{{ $visitor->asal_instansi }}</td>
-                                        <td>{{ $visitor->no_hp }}</td>
-                                        <td>{{ $visitor->tanggal }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+<div class="card">
+    <div class="card-body">
+    <h4 class="font-weight-bold mb-0">Data Tamu Kunjungan</h4>
+    <br>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+ 
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
+                    Rekap
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
+                    <li><a class="dropdown-item" href="{{ route('cetak-tamu') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+                    <li><a class="dropdown-item" href="{{ route('xlsx') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+                </ul>
             </div>
+            <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
+                <i class="fas fa-plus"></i> &nbsp;Tambah Data 
+            </button>
         </div>
-        <!-- Pagination -->
-        <br></br>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-            <li class="page-item {{ ($visitors->onFirstPage()) ? 'disabled' : '' }}">
-                <a class="page-link" href="{{ $visitors->previousPageUrl() }}">Previous</a>
-            </li>
-            @for ($i = 1; $i <= $visitors->lastPage(); $i++)
-            <li class="page-item {{ ($visitors->currentPage() == $i) ? 'active' : '' }}">
-                <a class="page-link" href="{{ $visitors->url($i) }}">{{ $i }}</a>
-            </li>
-            @endfor
-            <li class="page-item {{ ($visitors->currentPage() == $visitors->lastPage()) ? 'disabled' : '' }}">
-                <a class="page-link" href="{{ $visitors->nextPageUrl() }}">Next</a>
-            </li>
-            </ul>
-        </nav>
-        <!-- End Pagination -->
+
+        <!-- SECTION CONTAINER TABEL-->
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" id="table-list">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Keperluan</th>
+                        <th>Asal Instansi</th>
+                        <th>No HP</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Looping through visitors, but limited to 10 per page -->
+                    @php
+                    $currentPage = $visitors->currentPage() ?? 1; // Get current page
+                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                    @endphp
+                    <!-- Looping through visitors, but limited to 10 per page -->
+                    @foreach($visitors as $index => $visitor)
+                    <tr>
+                        <td>{{ ($visitors->currentPage() - 1) * $visitors->perPage() + $loop->index + 1 }}</td>
+                        <td>{{ $visitor->nama }}</td>
+                        <td>{{ $visitor->alamat }}</td>
+                        <td>{{ $visitor->keperluan }}</td>
+                        <td>{{ $visitor->asal_instansi }}</td>
+                        <td>{{ $visitor->no_hp }}</td>
+                        <td>{{ $visitor->tanggal }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-</section>
-<!-- END SECTION CONTAINER TABEL -->
+</div>
+
+<!-- Pagination -->
+<br></br>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {{ ($visitors->onFirstPage()) ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ $visitors->previousPageUrl() }}">Previous</a>
+        </li>
+        @for ($i = 1; $i <= $visitors->lastPage(); $i++)
+        <li class="page-item {{ ($visitors->currentPage() == $i) ? 'active' : '' }}">
+            <a class="page-link" href="{{ $visitors->url($i) }}">{{ $i }}</a>
+        </li>
+        @endfor
+        <li class="page-item {{ ($visitors->currentPage() == $visitors->lastPage()) ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ $visitors->nextPageUrl() }}">Next</a>
+        </li>
+    </ul>
+</nav>
+<!-- End Pagination -->
 
 <!-- POP UP TAMBAH DATA-->
 <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">

@@ -14,8 +14,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profile = Profile::all();
-        return view ('view.profile', compact('profile'));
+        $profiles = Profile::orderBy('created_at', 'desc')->paginate(6);
+        return view ('view.profile', compact('profiles'));
+    
     }
 
     /**

@@ -1,7 +1,4 @@
-
-
 <div class="sidebar">
-    <br><br>
     <ul class="nav flex-column">
         <img src="{{asset('img/logo2.png')}}" alt="" style="max-width: 65px; max-height: 65px; display: block; margin: auto; margin-top: 13px; margin-bottom: 15px;" />
         <h4 class="judul text-center">Pantau Tamu Pro</h4><br>
@@ -36,13 +33,6 @@
                         <a class="nav-link" href="{{ route('karyawan.index') }}">
                             <i class="ti-view-list-alt menu-icon"></i>
                             <span class="menu-title">Manajemen Karyawan</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('karyawan.index') }}">
-                            <i class="ti-agenda menu-icon"></i>
-                            <span class="menu-title">Survey Kepuasan Pengguna</span>
                         </a>
                     </li>
 

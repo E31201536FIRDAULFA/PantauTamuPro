@@ -15,8 +15,8 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $karyawan = Karyawan::all();
-        return view ('view.karyawan', compact('karyawan'));
+        $karyawans = Karyawan::orderBy('created_at', 'desc')->paginate(6);
+        return view ('view.karyawan', compact('karyawans'));
     }
 
     /**

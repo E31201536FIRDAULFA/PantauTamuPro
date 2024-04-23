@@ -1,18 +1,13 @@
 @extends('app')
 
 @section('content')
-
-<div class="d-flex justify-content-between align-items-center">
-    <div>
-        <h4 class="font-weight-bold mb-0">Manajemen Data QUESTIONS</h4>
-    </div>
-    <div>
-        <p id="reportButton"></p>
-    </div>
-</div>
-
+<div class="card">
+    <div class="card-body">
+    <h4 class="font-weight-bold mb-0">Data Survey Kepuasan Pengguna</h4>
+    <br>
 <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-    <div class="dropdown" style="margin-left: 10px;">
+
+ <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
             Rekap
         </button>
@@ -21,23 +16,17 @@
             <li><a class="dropdown-item" href="{{ route('excel-questions') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
         </ul>
     </div>
-    <ul>
     <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
         <i class="fas fa-plus"></i> &nbsp;Tambah Pertanyaan
     </button>
-</ul>
 </div>
 
 <!-- SECTION CONTAINER TABEL -->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
+
                         <div class="table-responsive">
                         <table class="table table-striped table-hover" id="table-list">
                                 <thead>
+                                    <tr>
                                     <th>No.</th>
                                     <th>Pertanyaan</th>
                                     <th>Baik</th>
@@ -45,6 +34,7 @@
                                     <th>Buruk</th>
                                     <th>Sangat Buruk</th>
                                     <th>Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($survey as $index => $survey)
@@ -55,10 +45,10 @@
                                         <td>{{ $survey->sangat_baik }}</td>
                                         <td>{{ $survey->buruk }}</td>
                                         <td>{{ $survey->sangat_buruk }}</td>
-                                        <td>
+                                        <td class="d-flex align-items-center">
                                         <button onclick="togglePopupedit({{ $survey->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;">
                                             <i class="fas fa-edit"></i>&nbsp;Edit
-                                        </button><br><br>
+                                        </button> &nbsp;
                                         <button onclick="konfirmasiHapus()" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
                                             <i class="fas fa-trash-alt"></i>&nbsp;Delete
                                         </button>
@@ -70,11 +60,26 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- END SECTION CONTAINER TABEL -->
+
+<!-- Pagination -->
+<br></br>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {{ ($survey->onFirstPage()) ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ $survey->previousPageUrl() }}">Previous</a>
+        </li>
+        @for ($i = 1; $i <= $survey->lastPage(); $i++)
+        <li class="page-item {{ ($survey->currentPage() == $i) ? 'active' : '' }}">
+            <a class="page-link" href="{{ $survey->url($i) }}">{{ $i }}</a>
+        </li>
+        @endfor
+        <li class="page-item {{ ($survey->currentPage() == $survey->lastPage()) ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ $survey->nextPageUrl() }}">Next</a>
+        </li>
+    </ul>
+</nav>
+<!-- End Pagination -->
 
 
 <!-- POP UP TAMBAH QUESTIONS -->
