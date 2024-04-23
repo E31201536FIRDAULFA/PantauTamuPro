@@ -11,16 +11,20 @@
     <table>
         <thead>
             <tr>
-                <th>Keterangan</th>
-                
+                <th>NIPD</th>
+                <th>Nama</th>
+                <th>Jabatan</th>
+                <th>Divisi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($feedback as $index => $feedback)
+            @foreach($karyawan as $index => $karyawan)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $feedback->keterangan }}</td>
-               
+                <td>{{ $karyawan->nipd }}</td>
+                <td>{{ $karyawan->nama }}</td>
+                <td>{{ $karyawan->jabatan }}</td>
+                <td>{{ $karyawan->divisi }}</td>
             </tr>
             @endforeach
         </tbody>

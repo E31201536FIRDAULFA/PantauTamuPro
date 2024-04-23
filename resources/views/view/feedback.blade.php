@@ -47,15 +47,19 @@
                                 <tbody>
                                     @foreach($feedback as $index => $feedback)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $feedback->keterangan }}</td>
                                         <td>
-                                        <button onclick="togglePopupedit()" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;">
-                                            <i class="fas fa-edit"></i>&nbsp;Edit
-                                        </button><br><br>
-                                        <button onclick="konfirmasiHapus()" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
-                                            <i class="fas fa-trash-alt"></i>&nbsp;Delete
-                                        </button>
+                                        <button onclick="togglePopupedit({{ $feedback->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
+                                                <i class="fas fa-edit"></i>&nbsp;Edit
+                                            </button><br><br>
+                                            <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST" class="delete-form">
+                                            @method('delete')
+                                            @csrf
+                                            <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
+                                                <i class="fas fa-trash-alt"></i>&nbsp;Delete
+                                            </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -66,6 +70,24 @@
                 </div>
             </div>
         </div>
+        <!-- Pagination -->
+        <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($feedbacks->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $feedbacks->lastPage(); $i++)
+            <li class="page-item {{ ($feedbacks->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($feedbacks->currentPage() == $feedbacks->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $feedbacks->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL -->
@@ -91,6 +113,7 @@
 <!-- END POP UP TAMBAH KARYAWAN -->
 
 <!-- POP UP EDIT KARYAWAN -->
+@foreach($feedbacks as $feedback)
 <div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Karyawan</h4>
     
@@ -108,6 +131,7 @@
         </div>
     </form>
 </div>
+@endforeach
 <!-- END POP UP EDIT KARYAWAN -->
 
 <script>

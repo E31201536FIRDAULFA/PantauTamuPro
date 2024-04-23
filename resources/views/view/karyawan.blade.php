@@ -48,18 +48,22 @@
                                 <tbody>
                                     @foreach($karyawan as $index => $karyawan)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($karyawans->currentPage() - 1) * $karyawans->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $karyawan->nipd }}</td>
                                         <td>{{ $karyawan->nama }}</td>
                                         <td>{{ $karyawan->jabatan }}</td>
                                         <td>{{ $karyawan->divisi }}</td>
                                         <td>
-                                        <button onclick="togglePopupedit({{ $karyawan->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;">
-                                            <i class="fas fa-edit"></i>&nbsp;Edit
-                                        </button><br><br>
-                                        <button onclick="konfirmasiHapus()" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
-                                            <i class="fas fa-trash-alt"></i>&nbsp;Delete
-                                        </button>
+                                        <button onclick="togglePopupedit({{ $karyawan->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
+                                                <i class="fas fa-edit"></i>&nbsp;Edit
+                                            </button><br><br>
+                                            <form action="{{ route('karyawan.destroy', $karyawan->id) }}" method="POST" class="delete-form">
+                                            @method('delete')
+                                            @csrf
+                                            <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
+                                                <i class="fas fa-trash-alt"></i>&nbsp;Delete
+                                            </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -70,6 +74,24 @@
                 </div>
             </div>
         </div>
+        <!-- Pagination -->
+        <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($karyawans->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $karyawans->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $karyawans->lastPage(); $i++)
+            <li class="page-item {{ ($karyawans->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $karyawans->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($karyawans->currentPage() == $karyawans->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $karyawans->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL -->
@@ -107,6 +129,7 @@
 <!-- END POP UP TAMBAH KARYAWAN -->
 
 <!-- POP UP EDIT KARYAWAN -->
+@foreach($karyawans as $karyawan)
 <div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Karyawan</h4>
     
@@ -136,6 +159,7 @@
         </div>
     </form>
 </div>
+@endforeach
 <!-- END POP UP EDIT KARYAWAN -->
 
 <script>
@@ -184,21 +208,5 @@
             popup.style.display = 'none';
         }
     }
-
-    function konfirmasiHapus() {
-            // Menampilkan jendela konfirmasi dengan pesan khusus
-            if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
-                // Jika pengguna mengklik "OK", lakukan penghapusan
-                hapusData();
-            } else {
-                // Jika pengguna mengklik "Batal", tidak lakukan apa-apa
-                return;
-            }
-        }
-
-        function hapusData() {
-            // Di sini Anda akan menempatkan kode untuk menghapus data
-            alert("Data berhasil dihapus!"); // Contoh pesan konfirmasi
-        }
 </script>
 @endsection

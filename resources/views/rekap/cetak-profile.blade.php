@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($profile as $index => $profile)
+            @foreach($profiles as $index => $profile)
             <tr>
             <td>{{ $index + 1 }}</td>
             <td>{{ $profile->nama }}</td>

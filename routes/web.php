@@ -38,25 +38,10 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
     
-// Route::controller(LoginController::class)->group(function () {
-//     Route::match(['GET', 'POST'],'/login', 'login')->name('login');
-//     Route::get('/logout', 'index')->name('logout');
-
-// });
-
-// Route::middleware('auth')->group(function () {
-//     Route::prefix('admin')->group(function () {
         Route::get('/table',[HomeController::class,'tabler'])->name('table');
         Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard')->middleware('auth.admin');
         Route::get('/element',[VisitorController::class,'index'])->name('element')->middleware('auth.admin');
         Route::post('/tambahdata', [VisitorController::class, 'store'])->name('tambahdata');
-        
-        // Route::get('/feedback',[FeedbackController::class,'index'])->name('feedback');
-        // Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback');
-        
-        Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
-        // Route::delete('/profiles/{id}', [ProfileController::class, 'destroy'])->name('profiles.destroy');
 
         Route::controller(ProfileController::class)->group(function () {
             Route::resource('/profile', ProfileController::class);

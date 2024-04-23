@@ -41,18 +41,26 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="table-list">
                                 <thead>
-                                    <th>No.</th>
-                                    <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Keperluan</th>
-                                    <th>Asal Instansi</th>
-                                    <th>No HP</th>
-                                    <th>Tanggal</th>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Nama</th>
+                                        <th>Alamat</th>
+                                        <th>Keperluan</th>
+                                        <th>Asal Instansi</th>
+                                        <th>No HP</th>
+                                        <th>Tanggal</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- Looping through visitors, but limited to 10 per page -->
+                                    @php
+                                    $currentPage = $visitors->currentPage() ?? 1; // Get current page
+                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                                    @endphp
+                                    <!-- Looping through visitors, but limited to 10 per page -->
                                     @foreach($visitors as $index => $visitor)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($visitors->currentPage() - 1) * $visitors->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $visitor->nama }}</td>
                                         <td>{{ $visitor->alamat }}</td>
                                         <td>{{ $visitor->keperluan }}</td>
@@ -68,6 +76,24 @@
                 </div>
             </div>
         </div>
+        <!-- Pagination -->
+        <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($visitors->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $visitors->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $visitors->lastPage(); $i++)
+            <li class="page-item {{ ($visitors->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $visitors->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($visitors->currentPage() == $visitors->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $visitors->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL -->

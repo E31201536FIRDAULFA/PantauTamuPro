@@ -57,9 +57,15 @@
                                     <th>Option</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($vip as $index => $vip)
+                                    <!-- Looping through vips, but limited to 10 per page -->
+                                    @php
+                                    $currentPage = $vips->currentPage() ?? 1; // Get current page
+                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                                    @endphp
+                                    <!-- Looping through vips, but limited to 10 per page -->
+                                    @foreach($vips as $index => $vip)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($vips->currentPage() - 1) * $vips->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $vip->undangan }}</td>
                                         <td>{{ $vip->nama }}</td>
                                         <td>{{ $vip->alamat }}</td>
@@ -96,6 +102,24 @@
                 </div>
             </div>
         </div>
+        <!-- Pagination -->
+        <br></br>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+            <li class="page-item {{ ($vips->onFirstPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $vips->previousPageUrl() }}">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $vips->lastPage(); $i++)
+            <li class="page-item {{ ($vips->currentPage() == $i) ? 'active' : '' }}">
+                <a class="page-link" href="{{ $vips->url($i) }}">{{ $i }}</a>
+            </li>
+            @endfor
+            <li class="page-item {{ ($vips->currentPage() == $vips->lastPage()) ? 'disabled' : '' }}">
+                <a class="page-link" href="{{ $vips->nextPageUrl() }}">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Pagination -->
     </div>
 </section>
 <!-- END SECTION CONTAINER TABEL-->
@@ -133,7 +157,7 @@
         </div>
         <div class="form-group">
             <label for="status">Tanggal</label>
-            <input type="text" class="form-control" id="status" name="tanggal" placeholder="Masukkan Tanggal">
+            <input type="date" class="form-control" id="status" name="tanggal" placeholder="Masukkan Tanggal">
         </div>
         <div style="text-align: center;">
             <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Submit</button>
