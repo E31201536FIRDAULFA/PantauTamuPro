@@ -37,7 +37,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($survey as $index => $survey)
+                                    @foreach($surveys as $index => $survey)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $survey->question }}</td>
@@ -66,16 +66,16 @@
 <br></br>
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-        <li class="page-item {{ ($survey->onFirstPage()) ? 'disabled' : '' }}">
-            <a class="page-link" href="{{ $survey->previousPageUrl() }}">Previous</a>
+        <li class="page-item {{ ($surveys->onFirstPage()) ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ $surveys->previousPageUrl() }}">Previous</a>
         </li>
-        @for ($i = 1; $i <= $survey->lastPage(); $i++)
-        <li class="page-item {{ ($survey->currentPage() == $i) ? 'active' : '' }}">
-            <a class="page-link" href="{{ $survey->url($i) }}">{{ $i }}</a>
+        @for ($i = 1; $i <= $surveys->lastPage(); $i++)
+        <li class="page-item {{ ($surveys->currentPage() == $i) ? 'active' : '' }}">
+            <a class="page-link" href="{{ $surveys->url($i) }}">{{ $i }}</a>
         </li>
         @endfor
-        <li class="page-item {{ ($survey->currentPage() == $survey->lastPage()) ? 'disabled' : '' }}">
-            <a class="page-link" href="{{ $survey->nextPageUrl() }}">Next</a>
+        <li class="page-item {{ ($surveys->currentPage() == $surveys->lastPage()) ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ $surveys->nextPageUrl() }}">Next</a>
         </li>
     </ul>
 </nav>
