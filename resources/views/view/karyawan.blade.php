@@ -46,7 +46,13 @@
                                     <th>Option</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($karyawan as $index => $karyawan)
+                                    <!-- Looping through karyawans, but limited to 10 per page -->
+                                    @php
+                                    $currentPage = $karyawans->currentPage() ?? 1; // Get current page
+                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                                    @endphp
+                                    <!-- Looping through karyawans, but limited to 10 per page -->
+                                    @foreach($karyawans as $index => $karyawan)
                                     <tr>
                                         <td>{{ ($karyawans->currentPage() - 1) * $karyawans->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $karyawan->nipd }}</td>

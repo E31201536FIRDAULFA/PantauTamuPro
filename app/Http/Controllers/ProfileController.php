@@ -14,8 +14,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profile = Profile::all();
-        return view ('view.profile', compact('profile'));
+        $profiles = Profile::orderBy('created_at', 'desc')->paginate(10);
+        return view ('view.profile', compact('profiles'));
     }
 
     /**
@@ -23,7 +23,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('profile.create');
+        return view('profiles.create');
     }
 
     /**
@@ -87,6 +87,6 @@ class ProfileController extends Controller
 
     public function xlsx()
     {
-        return Excel::download(new ProfileExport, 'profiles.xlsx');
+        return Excel::download(new ProfileExport, 'profile.xlsx');
     }
 }

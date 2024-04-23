@@ -113,6 +113,7 @@
 <!-- END POP UP TAMBAH QUESTIONS -->
 
 <!-- POP UP EDIT QUESTIONS -->
+@foreach($survey as $survey)
 <div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
     <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data QUESTIONS</h4>
     
@@ -146,6 +147,7 @@
         </div>
     </form>
 </div>
+@endforeach
 <!-- END POP UP EDIT QUESTIONS -->
 
 <script>

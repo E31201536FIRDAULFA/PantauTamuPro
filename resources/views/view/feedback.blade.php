@@ -45,21 +45,27 @@
                                     <th>Opsi</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($feedback as $index => $feedback)
+                                    <!-- Looping through feedbacks, but limited to 10 per page -->
+                                    @php
+                                    $currentPage = $feedbacks->currentPage() ?? 1; // Get current page
+                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                                    @endphp
+                                    <!-- Looping through feedbacks, but limited to 10 per page -->
+                                    @foreach($feedbacks as $index => $feedback)
                                     <tr>
                                         <td>{{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $feedback->keterangan }}</td>
                                         <td>
                                         <button onclick="togglePopupedit({{ $feedback->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
                                                 <i class="fas fa-edit"></i>&nbsp;Edit
-                                            </button><br><br>
+                                        </button><br><br>
                                             <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST" class="delete-form">
                                             @method('delete')
                                             @csrf
-                                            <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
+                                        <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
                                                 <i class="fas fa-trash-alt"></i>&nbsp;Delete
-                                            </button>
-                                            </form>
+                                        </button>
+                                        </form>
                                         </td>
                                     </tr>
                                     @endforeach

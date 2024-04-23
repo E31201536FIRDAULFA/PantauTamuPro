@@ -49,7 +49,13 @@
                                     <th>Option</th>
                                 </thead>
                                 <tbody>
-                                    @foreach($profile as $index => $profile)
+                                   <!-- Looping through vips, but limited to 10 per page -->
+                                   @php
+                                    $currentPage = $profiles->currentPage() ?? 1; // Get current page
+                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                                    @endphp
+                                    <!-- Looping through profiles, but limited to 10 per page -->
+                                    @foreach($profiles as $index => $profile)
                                     <tr>
                                         <td>{{ ($profiles->currentPage() - 1) * $profiles->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $profile->nama }}</td>
@@ -59,16 +65,15 @@
                                         <td>{{ $profile->no_hp }}</td>
                                         <td>{{ $profile->tanggal_lahir }}</td>
                                         <td>
-                                            <button onclick="togglePopupedit({{ $profile->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
-                                                <i class="fas fa-edit"></i>&nbsp;Edit
-                                            </button><br><br>
+                                        <button onclick="togglePopupedit('{{ $profile->id }}')" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
+                                            <i class="fas fa-edit"></i>&nbsp;Edit
+                                        </button><br><br>
                                             <form action="{{ route('profile.destroy', $profile->id) }}" method="POST" class="delete-form">
                                             @method('delete')
                                             @csrf
                                             <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
                                                 <i class="fas fa-trash-alt"></i>&nbsp;Delete
                                             </button>
-                                            
                                             </form>
                                         </td>
                                     </tr>
@@ -145,8 +150,7 @@
 
 <!-- POP UP EDIT DATA -->
 @foreach($profiles as $profile)
-<div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 700px; ">
-    <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Tamu Kunjungan</h4>
+<div id="popupedit{{ $profile->id }}" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 700px; z-index: 9999;">   <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Tamu Kunjungan</h4>
 
     <form action="{{ route('profile.update', $profile->id) }}" method="POST">
     @csrf
@@ -178,7 +182,7 @@
         
         <div style="text-align: center;">
             <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Update</button>
-            <button type="button" class="btn btn-secondary" onclick="togglePopupedit()">Close</button>
+            <button type="button" class="btn btn-secondary" onclick="togglePopupedit('{{ $profile->id }}')">Close</button>
         </div>
     </form>
 </div>
@@ -224,8 +228,8 @@
     }
 
     // Function to toggle popup edit
-    function togglePopupedit() {
-        var popup = document.getElementById('popupedit');
+    function togglePopupedit(id) {
+        var popup = document.getElementById('popupedit' + id);
         if (popup.style.display === 'none') {
             popup.style.display = 'block';
         } else {
