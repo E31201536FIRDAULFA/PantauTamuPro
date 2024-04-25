@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Profile;
+use App\Models\Admin;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProfileExport;
 
@@ -14,8 +14,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::orderBy('created_at', 'desc')->paginate(10);
+        $profiles = Admin::orderBy('created_at', 'desc')->paginate(6);
         return view ('view.profile', compact('profiles'));
+    
     }
 
     /**
@@ -31,7 +32,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        Profile::create($request->all());
+        Admin::create($request->all());
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
         return redirect()->route('profile.index')->with('success', 'Data berhasil disimpan!');
@@ -50,7 +51,7 @@ class ProfileController extends Controller
      */
     public function edit(string $id)
     {
-        $profiles = Profile::findOrFail($id);
+        $profiles = Admin::findOrFail($id);
 
         // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
         return view('profile.edit', compact('profiles'));
@@ -61,7 +62,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $profiles = Profile::findOrFail($id);
+        $profiles = Admin::findOrFail($id);
 
         $profiles->update($request->all());
 
@@ -74,14 +75,14 @@ class ProfileController extends Controller
      */
     public function destroy(string $id)
     {
-        $profiles = Profile::findOrFail($id);
+        $profiles = Admin::findOrFail($id);
         $profiles->delete();
     
         return redirect()->route('profile.index')->with('success', 'Profil berhasil dihapus!');
     }
 
     public function cetak(){
-        $profiles = Profile::all();
+        $profiles = Admin::all();
         return view ('rekap.cetak-profile', compact('profiles'));
     }
 

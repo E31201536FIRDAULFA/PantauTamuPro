@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Admin extends Authenticatable
 {
     use HasFactory;
+
+    protected $table = 'admins';
+    protected $fillable = [
+        'name',
+        'email',
+        'role',
+        'password',
+    ];
 }

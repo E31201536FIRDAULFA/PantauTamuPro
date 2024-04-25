@@ -26,12 +26,12 @@ use App\Http\Controllers\SurveyController;
 */
 Route::get('/', [UserController::class, 'index']);
 Route::get('/Daftar-Tamu-Kunjungan', [FormulirController::class, 'daftar'])->name('daftartamukunjungan');
-Route::get('/Survey-Kepuasan-Pengguna', [FormulirController::class, 'survey'])->name('surveypengguna');
+Route::get('/Survey-Kepuasan-Pengguna', [SurveyController::class, 'survey'])->name('surveypengguna');
 // Route::get('/Survey-Kepuasan-Pengguna', [FormulirController::class, 'submitForm']);
 Route::get('/Input-Vip', [HomeController::class, 'codevip'])->name('codevip');
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/form', [FormulirController::class, 'storeForm']);
+Route::post('/daftar', [FormulirController::class, 'storeForm']);
 Route::get('/Formulir-Tamu',[FormulirController::class,'index'])->name('form-kunjungan');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
@@ -74,8 +74,6 @@ Route::post('/login', [LoginController::class, 'login']);
             Route::resource('/survey', SurveyController::class);
             Route::get('/cetak-questions', 'cetak')->name('cetak-questions'); 
             Route::get('/excel-questions', 'xlsx')->name('excel-questions');
-            Route::get('/survey/{id}/edit', 'edit')->name('survey.edit');
-            Route::put('/survey/{id}', 'update')->name('survey.update');
             
         });
 

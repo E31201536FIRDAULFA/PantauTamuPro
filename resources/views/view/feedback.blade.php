@@ -4,53 +4,32 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="css/popup.css">
 </head>
-<div class="d-flex justify-content-between align-items-center">
-    <div>
-        <h4 class="font-weight-bold mb-0">DATA FEEDBACK</h4>
-    </div>
-    <div>
-        <p id="reportButton"></p>
-    </div>
-</div>
-
-<div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-    <div class="dropdown" style="margin-left: 10px;">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
-            Rekap
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-            <li><a class="dropdown-item" href="{{ route('cetak-feedback') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="{{ route('excel-feedback') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
-        </ul>
-    </div>
-    <ul>
-    <!-- <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
-        <i class="fas fa-plus"></i> &nbsp;Tambah Data
-    </button> -->
-</ul>
-</div>
-
-<!-- SECTION CONTAINER TABEL -->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover" id="table-list">
-                                <thead>
-                                    <th>No.</th>
-                                    <th>Keterangan</th>
-                                    <th>Opsi</th>
+<div class="card">
+    <div class="card-body">
+    <h4 class="font-weight-bold mb-0">Data Feedback User</h4>
+    <br>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
+                    Rekap
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
+                    <li><a class="dropdown-item" href="{{ route('cetak-feedback') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+                    <li><a class="dropdown-item" href="{{ route('excel-feedback') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+                </ul>
+            </div>
+ 
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" id="table-list">
+            <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Keterangan</th>
+                                        <th>Opsi</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Looping through feedbacks, but limited to 10 per page -->
-                                    @php
-                                    $currentPage = $feedbacks->currentPage() ?? 1; // Get current page
-                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
-                                    @endphp
-                                    <!-- Looping through feedbacks, but limited to 10 per page -->
                                     @foreach($feedbacks as $index => $feedback)
                                     <tr>
                                         <td>{{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->index + 1 }}</td>
@@ -58,14 +37,14 @@
                                         <td>
                                         <button onclick="togglePopupedit({{ $feedback->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
                                                 <i class="fas fa-edit"></i>&nbsp;Edit
-                                        </button><br><br>
+                                            </button><br><br>
                                             <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST" class="delete-form">
                                             @method('delete')
                                             @csrf
-                                        <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
+                                            <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
                                                 <i class="fas fa-trash-alt"></i>&nbsp;Delete
-                                        </button>
-                                        </form>
+                                            </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -74,71 +53,27 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Pagination -->
-        <br></br>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-            <li class="page-item {{ ($feedbacks->onFirstPage()) ? 'disabled' : '' }}">
-                <a class="page-link" href="{{ $feedbacks->previousPageUrl() }}">Previous</a>
-            </li>
-            @for ($i = 1; $i <= $feedbacks->lastPage(); $i++)
-            <li class="page-item {{ ($feedbacks->currentPage() == $i) ? 'active' : '' }}">
-                <a class="page-link" href="{{ $feedbacks->url($i) }}">{{ $i }}</a>
-            </li>
-            @endfor
-            <li class="page-item {{ ($feedbacks->currentPage() == $feedbacks->lastPage()) ? 'disabled' : '' }}">
-                <a class="page-link" href="{{ $feedbacks->nextPageUrl() }}">Next</a>
-            </li>
-            </ul>
-        </nav>
-        <!-- End Pagination -->
-    </div>
-</section>
-<!-- END SECTION CONTAINER TABEL -->
 
+<br>
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item {{ ($feedbacks->onFirstPage()) ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $feedbacks->previousPageUrl() }}">Previous</a>
+                                </li>
+                                @for ($i = 1; $i <= $feedbacks->lastPage(); $i++)
+                                <li class="page-item {{ ($feedbacks->currentPage() == $i) ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $feedbacks->url($i) }}">{{ $i }}</a>
+                                </li>
+                                @endfor
+                                <li class="page-item {{ ($feedbacks->currentPage() == $feedbacks->lastPage()) ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $feedbacks->nextPageUrl() }}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- End Pagination -->
+                
 
-<!-- POP UP TAMBAH KARYAWAN -->
-<div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
-    <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Tambah Data Karyawan</h4>
-    
-    <form action="{{ route('feedback.store') }}" method="post">
-        @csrf
-        <div class="form-group">
-            <label for="nipd">Keterangan</label>
-            <input type="text" class="form-control" id="nipd" name="keterangan" placeholder="Masukkan nipd">
-        </div>
-        
-        <div style="text-align: center;">
-            <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Submit</button>
-            <button type="button" class="btn btn-secondary" onclick="togglePopup()">Close</button>
-        </div>
-    </form>
-</div>
-<!-- END POP UP TAMBAH KARYAWAN -->
-
-<!-- POP UP EDIT KARYAWAN -->
-@foreach($feedbacks as $feedback)
-<div id="popupedit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px;">
-    <h4 style="margin-top: 0; margin-bottom: 20px; text-align: center;">Edit Data Karyawan</h4>
-    
-    <form action="{{ route('feedback.update', $feedback->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <div class="form-group">
-            <label for="nama">Keterangan</label>
-            <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Masukkan keterangan" value="{{ $feedback->keterangan }}">
-    </div>
-        
-        <div style="text-align: center;">
-            <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Submit</button>
-            <button type="button" class="btn btn-secondary" onclick="togglePopupedit()">Close</button>
-        </div>
-    </form>
-</div>
-@endforeach
-<!-- END POP UP EDIT KARYAWAN -->
 
 <script>
     // Mendapatkan tombol "Report"

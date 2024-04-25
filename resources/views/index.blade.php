@@ -48,13 +48,14 @@
   <h2>- PENGEMBANG APLIKASI -</h2>
   <p>Tim yang bertanggung jawab atas pembuatan, pengujian, dan pemeliharaan aplikasi. Mereka merancang fitur, mengembangkan kode, dan memastikan keberfungsian aplikasi. Pengembang juga terlibat dalam menangani masukan pengguna, memperbaiki bug, dan mengimplementasikan pembaruan untuk meningkatkan kinerja dan pengalaman pengguna.</p>
   <div class="price__grid" style="display: flex; justify-content: center;">
-    <div class="price__card">
+    <div class="price__card" style="width: 19%;">
       <div class="price__card__content">
         <h4>Muhammad Bayu </h4>
         <h3></h3>
         <div class="img-container">
-          <img src="img/bayu.jpg" alt="header" class="centered-img" />
-        </div>
+    <img src="img/bayu.jpg" alt="header" class="centered-img" width="100%" />
+</div>
+
         <p>
           <i class="ri-checkbox-circle-line"></i>
           Designer Gua
@@ -65,12 +66,12 @@
         </p>
       </div>
     </div>
-    <div class="price__card">
+    <div class="price__card" style="width: 19%;">
       <div class="price__card__content">
         <h4>Septiananda Rifqi</h4>
         <h3></h3>
         <div class="img-container">
-          <img src="img/rifqi.jpg" alt="header" class="centered-img" />
+          <img src="img/rifqi.jpg" alt="header" class="centered-img" width="100%" />
         </div>
         <p>
           <i class="ri-checkbox-circle-line"></i>
@@ -78,12 +79,12 @@
         </p>
       </div>
     </div>
-    <div class="price__card">
+    <div class="price__card" style="width: 19%;">
       <div class="price__card__content">
         <h4>Firda Ulfa Unsilah</h4>
         <h3></h3>
         <div class="img-container">
-          <img src="img/firda.jpeg" alt="header" class="centered-img" />
+          <img src="img/firda.jpg" alt="header" class="centered-img" width="100%" />
         </div>
         <p>
           <i class="ri-checkbox-circle-line"></i>
@@ -95,12 +96,12 @@
         </p>
       </div>
     </div>
-    <div class="price__card">
+    <div class="price__card" style="width: 19%;">
       <div class="price__card__content">
         <h4>Fanisa Nur Arifah</h4>
         <h3></h3>
         <div class="img-container">
-          <img src="img/fanisa.jpg" alt="header" class="centered-img" />
+          <img src="img/fanisa.jpg" alt="header" class="centered-img" width="100%" />
         </div>
         <p>
           <i class="ri-checkbox-circle-line"></i>

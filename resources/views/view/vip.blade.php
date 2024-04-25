@@ -6,102 +6,88 @@
 <link rel="stylesheet" href="css/popup.css">
 </head>
 
-
-<div class="d-flex justify-content-between align-items-center">
-    <div>
-        <h4 class="font-weight-bold mb-0">Manajemen Tamu VIP</h4>
-    </div>
-    <div>
-        <p id="reportButton"></p>
-    </div>
-</div>
-
-<div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-    <div class="dropdown" style="margin-left: 10px;">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
-            Rekap
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-            <li><a class="dropdown-item" href="{{ route('cetak-vip') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="{{ route('excel-vip') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
-        </ul>
-    </div>
-    <ul>
-    <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
-        <i class="fas fa-plus"></i> &nbsp;Tambah Data
-    </button>
-</ul>
-
-</div>
-
-<!-- SECTION CONTAINER TABEL-->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover" id="table-list">
-                                <thead>
-                                    <th>No.</th>
-                                    <th>KD.Undangan</th>
-                                    <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Keperluan</th>
-                                    <th>Asal Instansi</th>
-                                    <th>No HP</th>
-                                    <th>Tanggal</th>
-                                    <th>Status</th>
-                                    <th>Input Keterangan</th>
-                                    <th>Option</th>
-                                </thead>
-                                <tbody>
-                                    <!-- Looping through vips, but limited to 10 per page -->
-                                    @php
-                                    $currentPage = $vips->currentPage() ?? 1; // Get current page
-                                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
-                                    @endphp
-                                    <!-- Looping through vips, but limited to 10 per page -->
-                                    @foreach($vips as $index => $vip)
-                                    <tr>
-                                        <td>{{ ($vips->currentPage() - 1) * $vips->perPage() + $loop->index + 1 }}</td>
-                                        <td>{{ $vip->undangan }}</td>
-                                        <td>{{ $vip->nama }}</td>
-                                        <td>{{ $vip->alamat }}</td>
-                                        <td>{{ $vip->keperluan }}</td>
-                                        <td>{{ $vip->asal_instansi }}</td>
-                                        <td>{{ $vip->no_hp }}</td>
-                                        <td>{{ $vip->tanggal }}</td>
-                                        <td>
-                                        <select id="status-dropdown">
-                                            <option>Proses</option>
-                                            <option value="approved" class="approved">Approved</option>
-                                            <option value="rejected" class="rejected">Rejected</option>
-                                            <option value="pending" class="pending">Pending</option>
-                                        </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" placeholder="Input Keterangan" />
-                                        </td>
-                                        <td>
-                                        <button onclick="editVisitor()" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;">
-                                            <i class="fas fa-edit"></i>&nbsp;Edit
-                                        </button><br><br>
-                                        <button onclick="deleteVisitor()" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
-                                            <i class="fas fa-trash-alt"></i>&nbsp;Delete
-                                        </button>
-                                        </td>
-
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+<div class="card">
+    <div class="card-body">
+    <h4 class="font-weight-bold mb-0">Data Tamu VIP</h4>
+    <br>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
+                    Rekap
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
+                    <li><a class="dropdown-item" href="{{ route('cetak-vip') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+                    <li><a class="dropdown-item" href="{{ route('excel-vip') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+                </ul>
             </div>
+            
+            <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
+                <i class="fas fa-plus"></i> &nbsp;Tambah Data
+            </button>
         </div>
+        
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" id="table-list">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>KD.Undangan</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Keperluan</th>
+                        <th>Asal Instansi</th>
+                        <th>No HP</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Input Keterangan</th>
+                        <th>Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Looping through vips, but limited to 10 per page -->
+                    @php
+                    $currentPage = $vips->currentPage() ?? 1; // Get current page
+                    $startNumber = ($currentPage - 1) * 10 + 1; // Calculate starting number
+                    @endphp
+                    <!-- Looping through vips, but limited to 10 per page -->
+                    @foreach($vips as $index => $vip)
+                    <tr>
+                        <td>{{ ($vips->currentPage() - 1) * $vips->perPage() + $loop->index + 1 }}</td>
+                        <td>{{ $vip->undangan }}</td>
+                        <td>{{ $vip->nama }}</td>
+                        <td>{{ $vip->alamat }}</td>
+                        <td>{{ $vip->keperluan }}</td>
+                        <td>{{ $vip->asal_instansi }}</td>
+                        <td>{{ $vip->no_hp }}</td>
+                        <td>{{ $vip->tanggal }}</td>
+                        <td>
+                        <select id="status-dropdown">
+                            <option>Proses</option>
+                            <option value="approved" class="approved">Approved</option>
+                            <option value="rejected" class="rejected">Rejected</option>
+                            <option value="pending" class="pending">Pending</option>
+                        </select>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Input Keterangan" />
+                        </td>
+                        <td>
+                        <button onclick="editVisitor()" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;">
+                            <i class="fas fa-edit"></i>&nbsp;Edit
+                        </button>&nbsp;
+                        <button onclick="deleteVisitor()" class="btn btn-danger" style="color: white; padding: 5px 10px; height: auto;">
+                            <i class="fas fa-trash-alt"></i>&nbsp;Delete
+                        </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+</div>
+
+
         <!-- Pagination -->
         <br></br>
         <nav aria-label="Page navigation example">
@@ -120,9 +106,7 @@
             </ul>
         </nav>
         <!-- End Pagination -->
-    </div>
-</section>
-<!-- END SECTION CONTAINER TABEL-->
+    
 
 
 <!-- POP UP TAMBAH DATA-->

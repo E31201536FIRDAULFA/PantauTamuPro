@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('survey_questions', function (Blueprint $table) {
             $table->id();
-            $table->text('question');
             $table->string('baik');
             $table->string('sangat_baik');
             $table->string('buruk');

@@ -2,51 +2,41 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center">
-    <div>
-        <h4 class="font-weight-bold mb-0">Manajemen Data Akun User</h4>
-    </div>
-    <div>
-        <p id="reportButton"></p>
-    </div>
-</div>
-
-<div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-    <div class="dropdown" style="margin-left: 10px;">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
-            Rekap
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-            <li><a class="dropdown-item" href="{{ route('cetak-profile') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
-            <li><a class="dropdown-item" href="{{ route('excel-profile') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
-        </ul>
-    </div>
-    <ul>
-        <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
-            <i class="fas fa-plus"></i> &nbsp;Tambah Akun
-        </button>
-    </ul>
-</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="css/popup.css">
+</head>
+<div class="card">
+    <div class="card-body">
+    <h4 class="font-weight-bold mb-0">Data Akun Profile</h4>
+    <br>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px;">
+                    Rekap
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
+                    <li><a class="dropdown-item" href="{{ route('cetak-profile') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+                    <li><a class="dropdown-item" href="{{ route('excel-profile') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
+                </ul>
+            </div>
+            <button class="btn btn-dark" type="button" style="padding: 5px 10px; color: #fff; margin-right: 10px;" onclick="togglePopup()">
+                <i class="fas fa-plus"></i> &nbsp;Tambah Data 
+            </button>
+        </div>
 
 
 <!-- SECTION CONTAINER TABEL-->
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="table-list">
                                 <thead>
+                                    <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
-                                    <th>Username</th>
                                     <th>Email</th>
-                                    <th>Alamat</th>
-                                    <th>No HP</th>
-                                    <th>TTL</th>
+                                    <th>Role User</th>
+                                    <th>Password</th>
                                     <th>Option</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                    <!-- Looping through vips, but limited to 10 per page -->
@@ -58,16 +48,14 @@
                                     @foreach($profiles as $index => $profile)
                                     <tr>
                                         <td>{{ ($profiles->currentPage() - 1) * $profiles->perPage() + $loop->index + 1 }}</td>
-                                        <td>{{ $profile->nama }}</td>
-                                        <td>{{ $profile->username }}</td>
+                                        <td>{{ $profile->name }}</td>
                                         <td>{{ $profile->email }}</td>
-                                        <td>{{ $profile->alamat }}</td>
-                                        <td>{{ $profile->no_hp }}</td>
-                                        <td>{{ $profile->tanggal_lahir }}</td>
-                                        <td>
-                                        <button onclick="togglePopupedit('{{ $profile->id }}')" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
-                                            <i class="fas fa-edit"></i>&nbsp;Edit
-                                        </button><br><br>
+                                        <td>{{ $profile->role }}</td>
+                                        <td>{{ $profile->password }}</td>
+                                        <td class="d-flex align-items-center">
+                                            <button onclick="togglePopupedit({{ $profile->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
+                                                <i class="fas fa-edit"></i>&nbsp;Edit
+                                            </button>&nbsp;
                                             <form action="{{ route('profile.destroy', $profile->id) }}" method="POST" class="delete-form">
                                             @method('delete')
                                             @csrf
@@ -83,8 +71,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            
          <!-- Pagination -->
          <br></br>
         <nav aria-label="Page navigation example">
@@ -103,9 +90,7 @@
             </ul>
         </nav>
         <!-- End Pagination -->
-    </div>
-</section>
-<!-- END SECTION CONTAINER TABEL -->
+   
 
 
 
@@ -116,28 +101,20 @@
     <form action="{{ route('profile.store') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="nama">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama">
-        </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username">
+            <label for="name">Nama</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
             <input type="text" class="form-control" id="email" name="email" placeholder="Masukkan asal email">
         </div>
         <div class="form-group">
-            <label for="alamat">Alamat</label>
-            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan asal alamat">
+            <label for="role">Role</label>
+            <input type="text" class="form-control" id="role" name="role" placeholder="Masukkan role">
         </div>
         <div class="form-group">
-            <label for="no_hp">No.Hp</label>
-            <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan asal nohp">
-        </div>
-        <div class="form-group">
-            <label for="tanggal_lahir">TTL</label>
-            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan asal ttl">
+            <label for="password">Password</label>
+            <input type="text" class="form-control" id="password" name="password" placeholder="Masukkan password">
         </div>
         
         <div style="text-align: center;">
@@ -156,28 +133,20 @@
     @csrf
     @method('PUT')
         <div class="form-group">
-            <label for="nipd">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" value="{{ $profile->nama }}">
-        </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="{{ $profile->username }}">
+            <label for="name">Nama</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ $profile->name }}">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
             <input type="text" class="form-control" id="email" name="email" value="{{ $profile->email }}">
         </div>
         <div class="form-group">
-            <label for="alamat">Alamat</label>
-            <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $profile->alamat }}">
+            <label for="role">Role</label>
+            <input type="text" class="form-control" id="role" name="role" value="{{ $profile->role }}">
         </div>
         <div class="form-group">
-            <label for="no_hp">No.Hp</label>
-            <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{ $profile->no_hp }}">
-        </div>
-        <div class="form-group">
-            <label for="tanggal_lahir">TTL</label>
-            <input type="text" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ $profile->tanggal_lahir }}">
+            <label for="password">Password</label>
+            <input type="text" class="form-control" id="password" name="password" value="{{ $profile->password }}">
         </div>
         
         <div style="text-align: center;">

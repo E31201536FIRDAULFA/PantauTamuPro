@@ -9,25 +9,18 @@
 <body>
     <h2 style="text-align: center;">Laporan Data Feedback</h2>
     <table>
-        <thead>
-            <tr>
-                <th>NIPD</th>
-                <th>Nama</th>
-                <th>Jabatan</th>
-                <th>Divisi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($karyawan as $index => $karyawan)
-            <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ $karyawan->nipd }}</td>
-                <td>{{ $karyawan->nama }}</td>
-                <td>{{ $karyawan->jabatan }}</td>
-                <td>{{ $karyawan->divisi }}</td>
-            </tr>
-            @endforeach
-        </tbody>
+    <tr>
+        <th>No.</th>
+        <th>Keterangan</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($feedbacks as $index => $feedback)
+    <tr>
+        <td>{{ $index + 1 }}</td>
+        <td>{{ $feedback->keterangan }}</td>
+    @endforeach
+    </tbody>
     </table>
 
     <script type="text/javascript">

@@ -12,7 +12,7 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $karyawans = Karyawan::orderBy('created_at', 'desc')->paginate(10);
+        $karyawans = Karyawan::orderBy('created_at', 'desc')->paginate(6);
         return view ('view.karyawan', compact('karyawans'));
     }
 

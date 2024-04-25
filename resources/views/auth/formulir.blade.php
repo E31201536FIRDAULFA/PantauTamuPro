@@ -19,7 +19,6 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{{ route('form-kunjungan') }}">Formulir Kunjungan</a>
-                    <a class="dropdown-item" href="{{ route('surveypengguna') }}">Survey Kepuasan</a>
                     <a class="dropdown-item" href="{{ route('daftartamukunjungan') }}">Buku Kunjungan Tamu</a>
                     <a class="dropdown-item" href="/">Home</a>
                 </div>
@@ -34,7 +33,7 @@
                     <!-- End Judul "Tamu Kunjungan" dan Menu Dropdown -->
 
             <div class="card-body w-100">
-                <form action="/form" method="post">
+                <form action="/daftar" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="nama">Nama</label>

@@ -17,6 +17,14 @@ class AdminSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'), // pastikan untuk mengenkripsi password
+            'role' => 'admin',
+        ]);
+
+        Admin::create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => bcrypt('superadmin'), // pastikan untuk mengenkripsi password
+            'role' => 'spadmin',
         ]);
     }
 }

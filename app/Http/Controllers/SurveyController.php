@@ -11,8 +11,8 @@ class SurveyController extends Controller
 {
     public function index()
     {
-        $survey = Survey::all();
-        return view ('view.questions', compact('survey'));
+        $surveys = Survey::orderBy('created_at', 'desc')->paginate(5);
+        return view ('view.questions', compact('surveys'));
     }
 
     public function create()
@@ -30,10 +30,7 @@ class SurveyController extends Controller
 
     public function edit(string $id)
     {
-        $survey = Survey::findOrFail($id);
-
-        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
-        return view('survey.edit', compact('survey'));
+        // 
     }
 
     /**
@@ -41,21 +38,21 @@ class SurveyController extends Controller
      */
     public function update(Request $request, string $id)
     {   
-        $survey = Survey::findOrFail($id);
-
-        $survey->update($request->all());
-
-        // Redirect atau kembali ke halaman sebelumnya dengan notifikasi
-        return redirect()->route('survey.index')->with('success', 'Data berhasil disimpan!');
+        //
     }
 
     public function cetak(){
-        $survey = Survey::all();
-        return view ('rekap.cetak-survey', compact('survey'));
+        $surveys = Survey::all();
+        return view ('rekap.cetak-survey', compact('surveys'));
     }
 
     public function xlsx()
     {
         return Excel::download(new SurveyExport, 'survey_questions.xlsx');
+    }
+
+    public function survey(){
+        $survey = Survey::all();
+        return view ('auth.survey', compact('survey'));
     }
 }

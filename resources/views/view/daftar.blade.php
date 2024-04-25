@@ -28,7 +28,6 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{ route('form-kunjungan') }}">Formulir Kunjungan</a>
-                    <a class="dropdown-item" href="{{ route('surveypengguna') }}">Survey Kepuasan</a>
                     <a class="dropdown-item" href="{{ route('daftartamukunjungan') }}">Buku Kunjungan Tamu</a>
                     <a class="dropdown-item" href="/">Home</a>
                 </div>

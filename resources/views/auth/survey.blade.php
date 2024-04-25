@@ -34,37 +34,35 @@
                         <h2 class="card-title">Survey Kepuasan</h2>
                     </div>
                     <!-- End Judul "Tamu Kunjungan" dan Menu Dropdown -->
+                    <div class="card-body w-100">
+    <form action="/daftar" method="post">
+        @csrf
+        <label>Apakah Navigasi Aplikasi Kami Nyaman Untuk Digunakan?</label><br>
+        <div>
+            <input type="radio" id="baik" name="rating">
+            <label for="baik">Baik</label>
+        </div>
+        <div>
+            <input type="radio" id="sangat_baik" name="rating">
+            <label for="sangat_baik">Sangat Baik</label>
+        </div>
+        <div>
+            <input type="radio" id="buruk" name="rating">
+            <label for="buruk">Buruk</label>
+        </div>
+        <div>
+            <input type="radio" id="sangat_buruk" name="rating">
+            <label for="sangat_buruk">Sangat Buruk</label>
+        </div>
+        <br>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-secondary" style="width: 100%;">Submit</button>
+        </div>
+    </form>
+</div>
 
-            <div class="card-body w-100">
-                <form action="/form" method="post">
-                @csrf
-                @foreach($survey as $survey)
-                <label for="rating">{{ $survey->question }}</label>
-                <div>
-                    <input type="radio" id="rating-{{ $survey->id }}5" name="rating" value="5">
-                    <label for="rating-{{ $survey->id }}5">Baik</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-{{ $survey->id }}4" name="rating" value="4">
-                    <label for="rating-{{ $survey->id }}4">Sangat Baik</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-{{ $survey->id }}3" name="rating" value="3">
-                    <label for="rating-{{ $survey->id }}3">Buruk</label>
-                </div>
-                <div>
-                    <input type="radio" id="rating-{{ $survey->id }}2" name="rating" value="2">
-                    <label for="rating-{{ $survey->id }}2">Sangat Buruk</label>
-                </div>
-                <br>
-
-                
-                @endforeach
-                </form>
           
-                <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-secondary" style="width: 100%;">Submit</button>
-                </div>
+                
 
 
 
