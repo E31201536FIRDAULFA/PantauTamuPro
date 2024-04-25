@@ -1,9 +1,8 @@
 <?php
-
 namespace Database\Seeders;
-use App\Models\Admin;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+
 use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
@@ -13,18 +12,14 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'), // pastikan untuk mengenkripsi password
-            'role' => 'admin',
-        ]);
-
-        Admin::create([
-            'name' => 'Super Admin',
-            'email' => 'superadmin@gmail.com',
-            'password' => bcrypt('superadmin'), // pastikan untuk mengenkripsi password
-            'role' => 'spadmin',
+        User::create([
+            'name' => 'bayu',
+            'email' => 'bayu@gmail.com',
+            'password' => bcrypt('admin'),
+            'username' => 'bayu123',
+            'alamat' => 'Jl. Contoh No. 123',
+            'no_telepon' => '08123456789',
+            'tanggal_lahir' => '1990-01-01',
         ]);
     }
 }

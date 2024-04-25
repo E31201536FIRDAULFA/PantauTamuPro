@@ -12,7 +12,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admins')->attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
 
             return response()->json([
                 'success' => true,
