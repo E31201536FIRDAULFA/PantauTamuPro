@@ -7,25 +7,21 @@
     <link rel="stylesheet" href="{{asset('css/cetak.css')}}">
 </head>
 <body>
-    <h2 style="text-align: center;">Laporan Data Profile Akun</h2>
+    <h2 style="text-align: center;">Laporan Data Feedback</h2>
     <table>
         <thead>
             <tr>
-            <th>No.</th>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Role User</th>
-            <th>Password</th>
+                <th>No.</th>
+                <th>Keterangan</th>
+                <th>Tanggal</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($profiles as $index => $admins)
+            @foreach($cetakPertanggal as $index => $feedback)
             <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $admins->name }}</td>
-            <td>{{ $admins->email }}</td>
-            <td>{{ $admins->name }}</td>
-            <td>{{ $admins->password }}</td>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $feedback->keterangan }}</td>
+                <td>{{ $feedback->created_at }}</td>
             </tr>
             @endforeach
         </tbody>

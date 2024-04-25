@@ -52,13 +52,15 @@ Route::post('/login', [LoginController::class, 'login']);
 
         Route::controller(VipController::class)->group(function () {
             Route::resource('/vip', VipController::class);
-            Route::get('/cetak-vip', 'cetak')->name('cetak-vip'); 
+            Route::get('/cetak-vip-form', 'cetakForm')->name('cetak-vip-form');
+            Route::get('/cetak-vip-tanggal/{tanggalAwal}/{tanggalAkhir}', 'cetakTanggal')->name('cetak-vip-tanggal');  
             Route::get('/excel-vip', 'xlsx')->name('excel-vip');
             
         });
         
         Route::controller(VisitorController::class)->group(function () {
-            Route::get('/cetak-tamu', 'cetak')->name('cetak-tamu'); 
+            Route::get('/cetak-tamu-form', 'cetakForm')->name('cetak-tamu-form');
+            Route::get('/cetak-tamu-tanggal/{tanggalAwal}/{tanggalAkhir}', 'cetakTanggal')->name('cetak-tamu-tanggal');  
             Route::get('/excel', 'xlsx')->name('xlsx'); 
         
         });
@@ -79,7 +81,8 @@ Route::post('/login', [LoginController::class, 'login']);
 
         Route::controller(FeedbackController::class)->group(function () {
             Route::resource('/feedback', FeedbackController::class);
-            Route::get('/cetak-feedback', 'cetak')->name('cetak-feedback'); 
+            Route::get('/cetak-feedback-form', 'cetakForm')->name('cetak-feedback-form');
+            Route::get('/cetak-feedback-tanggal/{tanggalAwal}/{tanggalAkhir}', 'cetakTanggal')->name('cetak-feedback-tanggal');  
             Route::get('/excel-feedback', 'xlsx')->name('excel-feedback');
             
         });

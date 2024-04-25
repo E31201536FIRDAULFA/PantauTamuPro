@@ -84,13 +84,24 @@ class FeedbackController extends Controller
         //
     }
 
-    public function cetak(){
-        $feedbacks = Feedback::all();
-        return view ('rekap.cetak-feedback', compact('feedbacks'));
-    }
-
     public function xlsx()
     {
         return Excel::download(new FeedbackExport, 'feedback.xlsx');
+    }
+
+    public function cetakForm()
+    {
+        return view('feedback.cetak-feedback-form');
+    }
+
+    public function cetakTanggal($tanggalAwal, $tanggalAkhir)
+    {
+        $tanggalAwal = date('Y-m-d', strtotime($tanggalAwal));
+        $tanggalAkhir = date('Y-m-d', strtotime($tanggalAkhir));
+        $cetakPertanggal = Feedback::whereDate('created_at', '>=', $tanggalAwal)
+                                ->whereDate('created_at', '<=', $tanggalAkhir)
+                                ->get();
+                                
+        return view('feedback.cetak-feedback-tanggal', compact('cetakPertanggal'));
     }
 }

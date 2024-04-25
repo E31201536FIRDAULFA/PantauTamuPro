@@ -87,14 +87,22 @@ class VisitorController extends Controller
         //
     }
 
-    public function cetak(){
-        $dataCetakTamu = Visitor::all();
-        return view ('rekap.cetak-tamu', compact('dataCetakTamu'));
-    }
+
 
     public function xlsx()
     {
         // return Excel::download(new TamuExport, 'users.xlsx');
         return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    public function cetakForm()
+    {
+        return view('tamu.cetak-tamu-form');
+    }
+
+    public function cetakTanggal($tanggalAwal, $tanggalAkhir)
+    {
+        $cetakPertanggal = Visitor::whereBetween('tanggal',[$tanggalAwal, $tanggalAkhir])->get();
+        return view('tamu.cetak-tamu-tanggal', compact('cetakPertanggal'));
     }
 }

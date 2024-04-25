@@ -70,13 +70,19 @@ class VipController extends Controller
         //
     }
 
-    public function cetak(){
-        $vip = Vip::all();
-        return view ('rekap.cetak-vip', compact('vip'));
-    }
-
     public function xlsx()
     {
         return Excel::download(new VipExport, 'vip.xlsx');
+    }
+
+    public function cetakForm()
+    {
+        return view('vip.cetak-vip-form');
+    }
+
+    public function cetakTanggal($tanggalAwal, $tanggalAkhir)
+    {
+        $cetakPertanggal = Vip::whereBetween('tanggal',[$tanggalAwal, $tanggalAkhir])->get();
+        return view('vip.cetak-vip-tanggal', compact('cetakPertanggal'));
     }
 }

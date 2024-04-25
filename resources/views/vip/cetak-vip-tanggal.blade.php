@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="{{asset('css/cetak.css')}}">
 </head>
 <body>
-    <h2 style="text-align: center;">Laporan Data Tamu Vip</h2>
+    <h2 style="text-align: center;">Laporan Data Tamu Kunjungan VIP</h2>
     <table>
         <thead>
             <tr>
                 <th>No.</th>
-                <th>KD.Undangan</th>
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>Keperluan</th>
@@ -22,16 +21,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($vip as $index => $vip)
+            @foreach($cetakPertanggal as $index => $vip)
             <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $vip->undangan }}</td>
-            <td>{{ $vip->nama }}</td>
-            <td>{{ $vip->alamat }}</td>
-            <td>{{ $vip->keperluan }}</td>
-            <td>{{ $vip->asal_instansi }}</td>
-            <td>{{ $vip->no_hp }}</td>
-            <td>{{ $vip->tanggal }}</td>                                       
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $vip->nama }}</td>
+                <td>{{ $vip->alamat }}</td>
+                <td>{{ $vip->keperluan }}</td>
+                <td>{{ $vip->asal_instansi }}</td>
+                <td>{{ $vip->no_hp }}</td>
+                <td>{{ $vip->tanggal }}</td>
             </tr>
             @endforeach
         </tbody>

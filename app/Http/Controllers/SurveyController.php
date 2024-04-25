@@ -55,4 +55,20 @@ class SurveyController extends Controller
         $survey = Survey::all();
         return view ('auth.survey', compact('survey'));
     }
+
+    // public function cetakForm()
+    // {
+    //     return view('survey.cetak-survey-form');
+    // }
+
+    // public function cetakTanggal($tanggalAwal, $tanggalAkhir)
+    // {
+    //     $tanggalAwal = date('Y-m-d', strtotime($tanggalAwal));
+    //     $tanggalAkhir = date('Y-m-d', strtotime($tanggalAkhir));
+    //     $cetakPertanggal = Survey::whereDate('created_at', '>=', $tanggalAwal)
+    //                             ->whereDate('created_at', '<=', $tanggalAkhir)
+    //                             ->get();
+                                
+    //     return view('survey.cetak-survey-tanggal', compact('cetakPertanggal'));
+    // }
 }

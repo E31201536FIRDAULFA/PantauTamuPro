@@ -12,24 +12,24 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Keperluan</th>
-                <th>Asal Instansi</th>
-                <th>No HP</th>
+                <th>Pertanyaan</th>
+                <th>Baik</th>
+                <th>Sangat Baik</th>
+                <th>Buruk</th>
+                <th>Sangat Buruk</th>
                 <th>Tanggal</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($dataCetakTamu as $index => $visitor)
+            @foreach($cetakPertanggal as $index => $survey)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $visitor->nama }}</td>
-                <td>{{ $visitor->alamat }}</td>
-                <td>{{ $visitor->keperluan }}</td>
-                <td>{{ $visitor->asal_instansi }}</td>
-                <td>{{ $visitor->no_hp }}</td>
-                <td>{{ $visitor->tanggal }}</td>
+                <td>{{ $survey->question }}</td>
+                <td>{{ $survey->baik }}</td>
+                <td>{{ $survey->sangat_baik }}</td>
+                <td>{{ $survey->buruk }}</td>
+                <td>{{ $survey->sangat_buruk }}</td>
+                <td>{{ $survey->created_at }}</td>
             </tr>
             @endforeach
         </tbody>

@@ -14,7 +14,7 @@
                     Rekap
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="exportDropdownButton">
-                    <li><a class="dropdown-item" href="{{ route('cetak-feedback') }}" target="_blank" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
+                    <li><a class="dropdown-item" href="{{ route('cetak-feedback-form') }}" id="exportPdfButton"><i class="fas fa-file-pdf"></i> PDF</a></li>
                     <li><a class="dropdown-item" href="{{ route('excel-feedback') }}" id="exportExcelButton"><i class="fas fa-file-excel"></i> Excel</a></li>
                 </ul>
             </div>
@@ -26,6 +26,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Keterangan</th>
+                                        <th>Tanggal</th>
                                         <th>Opsi</th>
                                     </tr>
                                 </thead>
@@ -34,6 +35,7 @@
                                     <tr>
                                         <td>{{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->index + 1 }}</td>
                                         <td>{{ $feedback->keterangan }}</td>
+                                        <td>{{ $feedback->created_at }}</td>
                                         <td>
                                         <button onclick="togglePopupedit({{ $feedback->id }})" class="btn btn-success" style="color: white; padding: 5px 10px; height: auto;"> 
                                                 <i class="fas fa-edit"></i>&nbsp;Edit
