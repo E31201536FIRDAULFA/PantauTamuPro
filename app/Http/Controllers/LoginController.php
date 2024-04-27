@@ -29,8 +29,11 @@ class LoginController extends Controller
             // Jika otentikasi gagal
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
+<<<<<<< HEAD
 
       
+=======
+>>>>>>> 1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
     }
 
     public function logout(Request $request)

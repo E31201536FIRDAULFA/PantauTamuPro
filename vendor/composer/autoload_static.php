@@ -368,8 +368,13 @@ class ComposerStaticInit4b2b2946dcdf9f3a28fb814790ed1e3a
         ),
         'Psr\\Http\\Message\\' => 
         array (
+<<<<<<< HEAD
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
+=======
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+>>>>>>> 1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -575,12 +580,17 @@ class ComposerStaticInit4b2b2946dcdf9f3a28fb814790ed1e3a
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+<<<<<<< HEAD
         'App\\Exports\\FeedbackExport' => __DIR__ . '/../..' . '/app/Exports/FeedbackExport.php',
         'App\\Exports\\KaryawanExport' => __DIR__ . '/../..' . '/app/Exports/KaryawanExport.php',
         'App\\Exports\\ProfileExport' => __DIR__ . '/../..' . '/app/Exports/ProfileExport.php',
         'App\\Exports\\SurveyExport' => __DIR__ . '/../..' . '/app/Exports/SurveyExport.php',
         'App\\Exports\\UsersExport' => __DIR__ . '/../..' . '/app/Exports/UsersExport.php',
         'App\\Exports\\VipExport' => __DIR__ . '/../..' . '/app/Exports/VipExport.php',
+=======
+        'App\\Exports\\TamuExport' => __DIR__ . '/../..' . '/app/Exports/TamuExport.php',
+        'App\\Exports\\UsersExport' => __DIR__ . '/../..' . '/app/Exports/UsersExport.php',
+>>>>>>> 1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FeedbackController' => __DIR__ . '/../..' . '/app/Http/Controllers/FeedbackController.php',
         'App\\Http\\Controllers\\FormulirController' => __DIR__ . '/../..' . '/app/Http/Controllers/FormulirController.php',
@@ -590,11 +600,17 @@ class ComposerStaticInit4b2b2946dcdf9f3a28fb814790ed1e3a
         'App\\Http\\Controllers\\LogoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogoutController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterController.php',
+<<<<<<< HEAD
         'App\\Http\\Controllers\\SurveyController' => __DIR__ . '/../..' . '/app/Http/Controllers/SurveyController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\VipController' => __DIR__ . '/../..' . '/app/Http/Controllers/VipController.php',
         'App\\Http\\Controllers\\VisitorController' => __DIR__ . '/../..' . '/app/Http/Controllers/VisitorController.php',
         'App\\Http\\Controllers\\flutter\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/flutter/LoginController.php',
+=======
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
+        'App\\Http\\Controllers\\VipController' => __DIR__ . '/../..' . '/app/Http/Controllers/VipController.php',
+        'App\\Http\\Controllers\\VisitorController' => __DIR__ . '/../..' . '/app/Http/Controllers/VisitorController.php',
+>>>>>>> 1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -612,7 +628,10 @@ class ComposerStaticInit4b2b2946dcdf9f3a28fb814790ed1e3a
         'App\\Models\\Feedback' => __DIR__ . '/../..' . '/app/Models/Feedback.php',
         'App\\Models\\Karyawan' => __DIR__ . '/../..' . '/app/Models/Karyawan.php',
         'App\\Models\\Profile' => __DIR__ . '/../..' . '/app/Models/Profile.php',
+<<<<<<< HEAD
         'App\\Models\\Survey' => __DIR__ . '/../..' . '/app/Models/Survey.php',
+=======
+>>>>>>> 1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Vip' => __DIR__ . '/../..' . '/app/Models/Vip.php',
         'App\\Models\\Visitor' => __DIR__ . '/../..' . '/app/Models/Visitor.php',

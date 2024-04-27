@@ -16,7 +16,7 @@ class VipController extends Controller
     {
         $vips = Vip::orderBy('created_at', 'desc')->paginate(10);
         return view ('view.vip', compact('vips'));
-        $jumlah_vip_proses = Vip::where('status', 'Proses')->count();
+       
     }
 
     /**

@@ -14721,8 +14721,11 @@ fieldset:disabled .btn {
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background-color: #001a00;
+    <<<<<<< HEAD background-color: #001a00;
     border-color: #001a00;
+    =======background-color: #0d6efd;
+    border-color: #0d6efd;
+    >>>>>>>1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
 }
 
 .page-item.disabled .page-link {
@@ -24160,7 +24163,9 @@ body {
 .sidebar {
     padding-top: 0px;
     /* Menambahkan ruang di bagian atas sidebar */
-    background-color: #262626;
+    <<<<<<< HEAD background-color: #262626;
+    =======background-color: #6c757d;
+    >>>>>>>1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
     /* Warna latar belakang secondary */
     border-right: 1px solid #dee2e6;
     width: 250px;

@@ -8,12 +8,17 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+<<<<<<< HEAD
     'App\\Exports\\FeedbackExport' => $baseDir . '/app/Exports/FeedbackExport.php',
     'App\\Exports\\KaryawanExport' => $baseDir . '/app/Exports/KaryawanExport.php',
     'App\\Exports\\ProfileExport' => $baseDir . '/app/Exports/ProfileExport.php',
     'App\\Exports\\SurveyExport' => $baseDir . '/app/Exports/SurveyExport.php',
     'App\\Exports\\UsersExport' => $baseDir . '/app/Exports/UsersExport.php',
     'App\\Exports\\VipExport' => $baseDir . '/app/Exports/VipExport.php',
+=======
+    'App\\Exports\\TamuExport' => $baseDir . '/app/Exports/TamuExport.php',
+    'App\\Exports\\UsersExport' => $baseDir . '/app/Exports/UsersExport.php',
+>>>>>>> 1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\FeedbackController' => $baseDir . '/app/Http/Controllers/FeedbackController.php',
     'App\\Http\\Controllers\\FormulirController' => $baseDir . '/app/Http/Controllers/FormulirController.php',
@@ -23,11 +28,17 @@ return array(
     'App\\Http\\Controllers\\LogoutController' => $baseDir . '/app/Http/Controllers/LogoutController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\RegisterController' => $baseDir . '/app/Http/Controllers/RegisterController.php',
+<<<<<<< HEAD
     'App\\Http\\Controllers\\SurveyController' => $baseDir . '/app/Http/Controllers/SurveyController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Controllers\\VipController' => $baseDir . '/app/Http/Controllers/VipController.php',
     'App\\Http\\Controllers\\VisitorController' => $baseDir . '/app/Http/Controllers/VisitorController.php',
     'App\\Http\\Controllers\\flutter\\LoginController' => $baseDir . '/app/Http/Controllers/flutter/LoginController.php',
+=======
+    'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
+    'App\\Http\\Controllers\\VipController' => $baseDir . '/app/Http/Controllers/VipController.php',
+    'App\\Http\\Controllers\\VisitorController' => $baseDir . '/app/Http/Controllers/VisitorController.php',
+>>>>>>> 1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Admin' => $baseDir . '/app/Http/Middleware/Admin.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
@@ -45,7 +56,10 @@ return array(
     'App\\Models\\Feedback' => $baseDir . '/app/Models/Feedback.php',
     'App\\Models\\Karyawan' => $baseDir . '/app/Models/Karyawan.php',
     'App\\Models\\Profile' => $baseDir . '/app/Models/Profile.php',
+<<<<<<< HEAD
     'App\\Models\\Survey' => $baseDir . '/app/Models/Survey.php',
+=======
+>>>>>>> 1518b7b6e3b34bf4f6752cfcbb6d72ef7dcea744
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\Vip' => $baseDir . '/app/Models/Vip.php',
     'App\\Models\\Visitor' => $baseDir . '/app/Models/Visitor.php',
